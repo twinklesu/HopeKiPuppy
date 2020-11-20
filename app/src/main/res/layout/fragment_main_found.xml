@@ -54,6 +54,7 @@
                     android:layout_weight="1"
                     android:text="Dong" />
 
+
                 <Button
                     android:id="@+id/Setting_Go_Button"
                     android:layout_width="wrap_content"

@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.hopekipuppy.R
 import com.example.hopekipuppy.databinding.FragmentTitleBinding
+import com.example.hopekipuppy.title.MainLostFragmentDirections
 
 class TitleFragment : Fragment() {
 
@@ -27,11 +29,9 @@ class TitleFragment : Fragment() {
             R.layout.fragment_title, container, false
         )
 
-
-
-
-
-
+        binding.golostButton.setOnClickListener {
+            findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToMainLostFragment())
+        }
 
 
 
