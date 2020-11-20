@@ -1,4 +1,4 @@
-package com.example.hopekipuppy.title
+package com.example.hopekipuppy
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +11,7 @@ import com.example.hopekipuppy.R
 import com.example.hopekipuppy.databinding.FragmentTitleBinding
 
 class TitleFragment : Fragment() {
-    private lateinit var viewModel: TitleViewModel
+
 
     private lateinit var binding : FragmentTitleBinding
 
@@ -27,7 +27,7 @@ class TitleFragment : Fragment() {
             R.layout.fragment_title, container, false
         )
 
-        viewModel = ViewModelProvider(this).get(TitleViewModel::class.java)
+
 
 
 

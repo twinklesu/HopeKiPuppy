@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/titleFragment"
-        android:name="com.example.hopekipuppy.title.TitleFragment"
+        android:name="com.example.hopekipuppy.TitleFragment"
         android:label="fragment_title"
         tools:layout="@layout/fragment_title" >
         <action
@@ -50,7 +50,7 @@
         tools:layout="@layout/fragment_set_keyword" />
     <fragment
         android:id="@+id/mainLostFragment"
-        android:name="com.example.hopekipuppy.MainLostFragment"
+        android:name="com.example.hopekipuppy.title.MainLostFragment"
         android:label="fragment_main_lost"
         tools:layout="@layout/fragment_main_lost" >
         <action
@@ -82,7 +82,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFoundFragment"
-        android:name="com.example.hopekipuppy.MainFoundFragment"
+        android:name="com.example.hopekipuppy.title.MainFoundFragment"
         android:label="fragment_main_found"
         tools:layout="@layout/fragment_main_found" >
         <action
