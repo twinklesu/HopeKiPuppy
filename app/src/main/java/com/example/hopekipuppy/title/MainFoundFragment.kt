@@ -11,7 +11,7 @@ import com.example.hopekipuppy.R
 import com.example.hopekipuppy.databinding.FragmentMainFoundBinding
 
 class MainFoundFragment : Fragment() {
-
+    private lateinit var viewModel: FoundViewModel
 
 
     private lateinit var binding : FragmentMainFoundBinding
@@ -25,7 +25,7 @@ class MainFoundFragment : Fragment() {
             R.layout.fragment_main_found, container, false)
 
 
-
+        viewModel = ViewModelProvider(this).get(FoundViewModel::class.java)
 
 
         return binding.root

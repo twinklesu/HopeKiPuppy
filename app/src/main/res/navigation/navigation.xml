@@ -56,8 +56,8 @@
         <action
             android:id="@+id/action_mainLostFragment_to_mainFoundFragment"
             app:destination="@id/mainFoundFragment"
-            app:popUpTo="@id/mainFoundFragment"
-            app:popUpToInclusive="false" />
+            app:popUpTo="@id/titleFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainLostFragment_to_settingFragment"
             app:destination="@id/settingFragment"

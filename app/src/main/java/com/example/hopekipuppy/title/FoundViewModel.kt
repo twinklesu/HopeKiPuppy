@@ -2,7 +2,5 @@ package com.example.hopekipuppy.title
 
 import androidx.lifecycle.ViewModel
 
-class MainViewModel: ViewModel() {
-
-
+class FoundViewModel : ViewModel(){
 }
