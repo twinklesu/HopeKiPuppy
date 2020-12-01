@@ -1,20 +1,35 @@
 package com.example.hopekipuppy.title
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
+import android.location.LocationManager
 import android.os.Bundle
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.hopekipuppy.MainActivity
 import com.example.hopekipuppy.R
 import com.example.hopekipuppy.databinding.FragmentMainLostBinding
+import com.google.android.gms.location.*
+import timber.log.Timber
+import java.io.IOException
+import java.util.*
 import androidx.recyclerview.widget.GridLayoutManager as GridLayoutManager
 
 class MainLostFragment : Fragment() {
     private lateinit var viewModel: LostViewModel
     private lateinit var binding : FragmentMainLostBinding
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationCallback: LocationCallback
 
     var writinglist = arrayListOf<Writing>(
         Writing("common","test title"),
@@ -57,7 +72,61 @@ class MainLostFragment : Fragment() {
         binding.LostRecyclerView.setHasFixedSize(true)
 
 
-        return binding.root
+        getLoc()
+        binding.DongText.text = MainActivity.login.user_town
 
+        return binding.root
+    }
+
+
+    private fun getLoc() {
+        var latitude: Double
+        var longitude: Double
+
+        // get permission
+        val lm = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (ActivityCompat.checkSelfPermission(
+                        requireActivity(),
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(requireActivity(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        ) {
+            val PERMISSIONS = arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+            ActivityCompat.requestPermissions(requireActivity(), PERMISSIONS, 100)
+        }
+
+        // get location
+        val locationRequest = LocationRequest.create()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = 10000
+        locationRequest.fastestInterval = 10000
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) { locationResult ?: return }}
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+            latitude = location.latitude
+            longitude = location.longitude
+            Timber.d("lat ${latitude}, long ${longitude}")
+            MainActivity.login.latitude = latitude
+            MainActivity.login.longitude = longitude
+
+            // get 동
+            val geocoder = Geocoder(this.context, Locale.KOREAN)
+            var addressList: List<Address>? = null
+            try {
+                do {
+                    addressList = geocoder.getFromLocation(latitude, longitude, 1)
+                } while (addressList!!.isEmpty())
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            val dong = addressList!![0].thoroughfare ?:"error"
+            Timber.d(dong)
+            MainActivity.login.user_town = dong
+        }
     }
 }

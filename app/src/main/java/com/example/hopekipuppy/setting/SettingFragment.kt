@@ -10,11 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.hopekipuppy.MainActivity
 import com.example.hopekipuppy.R
 import com.example.hopekipuppy.databinding.FragmentSettingBinding
-import org.json.JSONArray
 import org.json.JSONException
 import timber.log.Timber
 
@@ -33,6 +32,10 @@ class SettingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
+        // my information
+        binding.tvNickname.text = MainActivity.login.user_nicknm
+        binding.tvPhoneNum.text = MainActivity.login.user_tel
+        binding.tvMyTown.text = MainActivity.login.user_town
 
         // pet recycler view
         petAdapter = RecyclerAdapterSettingPets()
@@ -47,7 +50,7 @@ class SettingFragment : Fragment() {
     }
 
 
-    fun volley_test() {
+    private fun volley_test() {
         val queue: RequestQueue = Volley.newRequestQueue(this.context)
         val url_test = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/test/"
         var test_result: ArrayList<Test> = ArrayList()

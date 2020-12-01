@@ -51,22 +51,20 @@
                     android:id="@+id/DongText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="Dong" />
 
                 <Button
                     android:id="@+id/Set_Keyword_Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="#" />
 
                 <Button
                     android:id="@+id/Setting_Go_Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="톱니바퀴모양" />
+                    android:text="톱니바퀴모양"
+                    android:layout_gravity="end"/>
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
