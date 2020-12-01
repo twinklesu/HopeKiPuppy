@@ -46,7 +46,9 @@ class LoginFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
 
-        onClickLoginButton()
+        binding.btLogin.setOnClickListener {
+            onClickLoginButton()
+        }
 
         return binding.root
     }
@@ -55,12 +57,10 @@ class LoginFragment : Fragment() {
     on click listener for login button
      */
     private fun onClickLoginButton() {
-        binding.btLogin.setOnClickListener {
             val id = binding.tvId.text.toString()
             val pw = binding.tvPw.text.toString()
             val login = Login(id = id, pw = pw)
             volley_login(login)
-        }
     }
 
 
