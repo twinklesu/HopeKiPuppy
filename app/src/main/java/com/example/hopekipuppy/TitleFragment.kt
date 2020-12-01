@@ -6,14 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
-import com.example.hopekipuppy.R
 import com.example.hopekipuppy.databinding.FragmentTitleBinding
-import com.example.hopekipuppy.title.MainLostFragmentDirections
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class TitleFragment : Fragment() {
 
+    val SPLASH_VIEW_TIME: Long = 2000 //2초간 스플래시 화면을 보여줌 (ms)
 
     private lateinit var binding : FragmentTitleBinding
 
@@ -23,7 +24,10 @@ class TitleFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
+        viewLifecycleOwner.lifecycleScope.launch {
+            delay(timeMillis = SPLASH_VIEW_TIME)
+            findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToLoginFragment())
+        }
 
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_title, container, false
@@ -32,6 +36,8 @@ class TitleFragment : Fragment() {
         binding.golostButton.setOnClickListener {
             findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToMainLostFragment())
         }
+
+
 
 
 
