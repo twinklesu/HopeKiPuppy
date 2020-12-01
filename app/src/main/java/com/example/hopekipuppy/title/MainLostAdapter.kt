@@ -26,20 +26,22 @@ class MainLostAdapter(val context: Context, val writingList : ArrayList<Writing>
     }
 
 
-    inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!){
+    inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val main_Image = itemView?.findViewById<ImageView>(R.id.main_image)
-        val main_Text  = itemView?.findViewById<TextView>(R.id.main_text)
+        val main_Text = itemView?.findViewById<TextView>(R.id.main_text)
 
-        fun bind(writing : Writing, context : Context){
-            if (writing.main_image != ""){
-                val Id = context.resources.getIdentifier(writing.main_image, "drawable", context.packageName)
+        fun bind(writing: Writing, context: Context) {
+            if (writing.main_image != "") {
+                val Id = context.resources.getIdentifier(
+                    writing.main_image,
+                    "drawable",
+                    context.packageName
+                )
                 main_Image?.setImageResource(Id)
-            } else{
+            } else {
                 main_Image?.setImageResource(R.mipmap.ic_launcher)
             }
             main_Text?.text = writing.main_text
         }
     }
-
-
 }

@@ -2,7 +2,7 @@ package com.example.hopekipuppy.title
 
 import androidx.lifecycle.ViewModel
 
-class LostViewModel: ViewModel() {
+class LostViewModel: ViewModel(){
 
 
 }
