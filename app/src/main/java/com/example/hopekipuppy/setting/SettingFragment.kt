@@ -1,5 +1,6 @@
 package com.example.hopekipuppy.setting
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -45,6 +46,10 @@ class SettingFragment : Fragment() {
 
         binding.btRegPet.setOnClickListener { findNavController().navigate(SettingFragmentDirections.actionSettingFragmentToRegisterPetFragment()) }
         binding.btTemp.setOnClickListener {
+            val fragment = MyPetFragment()
+            val bundle = Bundle()
+            bundle.putString("pet_name", "Rooney")
+            fragment.arguments = bundle
             findNavController().navigate(SettingFragmentDirections.actionSettingFragmentToMyPetFragment())
         }
 

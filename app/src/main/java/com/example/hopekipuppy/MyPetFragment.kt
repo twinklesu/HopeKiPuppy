@@ -1,5 +1,6 @@
 package com.example.hopekipuppy
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +18,8 @@ class MyPetFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        petName = requireArguments().getString("pet_name").toString()
+        Timber.d(petName)
     }
 
     override fun onCreateView(
