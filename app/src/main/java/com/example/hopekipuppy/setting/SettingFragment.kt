@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ import com.example.hopekipuppy.MyPetFragment
 import com.example.hopekipuppy.R
 import com.example.hopekipuppy.RegisterPetFragment
 import com.example.hopekipuppy.databinding.FragmentSettingBinding
+import com.example.hopekipuppy.title.MainLostAdapter
 import org.json.JSONException
 import timber.log.Timber
 
@@ -70,7 +72,9 @@ class SettingFragment : Fragment() {
                         val obj = Pet(result.getString("name"), result.getInt("age"), result.getString("variety"), result.getString("reg_num"), result.getString("character"))
                         pet_list.add(obj)
                     }
-                    // 여기서
+                    val RecyclerAdapterSettingPets = RecyclerAdapterSettingPets(binding.recyclerPets.context, pet_list)
+                    binding.recyclerPets.adapter = RecyclerAdapterSettingPets
+
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -82,13 +86,7 @@ class SettingFragment : Fragment() {
         queue.add(jsonArrayRequest)
 
 
-        // pet recycler view
-        petAdapter = RecyclerAdapterSettingPets()
-        recyclerView = binding.recyclerPets.apply {
-            setHasFixedSize(true)
-            // specify an viewAdapter
-            adapter = petAdapter
-        }
+
         return binding.root
     }
 

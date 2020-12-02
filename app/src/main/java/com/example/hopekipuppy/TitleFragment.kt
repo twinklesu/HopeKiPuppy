@@ -33,9 +33,6 @@ class TitleFragment : Fragment() {
             R.layout.fragment_title, container, false
         )
 
-        binding.golostButton.setOnClickListener {
-            findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToMainLostFragment())
-        }
 
 
 
