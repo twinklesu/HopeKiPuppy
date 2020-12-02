@@ -1,11 +1,10 @@
 package com.example.hopekipuppy
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
-import com.example.hopekipuppy.databinding.ActivityMainBinding
+import android.telephony.mbms.MbmsErrors
+import androidx.appcompat.app.AppCompatActivity
 import com.example.hopekipuppy.login.Login
-import timber.log.Timber
+import org.json.JSONException
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +16,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        try {AwsConnector().initializeAwsS3(this)}
+        catch (e: com.amazonaws.AmazonClientException) {
+            e.printStackTrace()
+        }
 
     }
 }
