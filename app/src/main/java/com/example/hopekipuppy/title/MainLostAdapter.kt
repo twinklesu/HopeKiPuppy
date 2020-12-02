@@ -45,3 +45,12 @@ class MainLostAdapter(val context: Context, val writingList : ArrayList<Writing>
         }
     }
 }
+
+
+data class LostWriting(
+    val main_text: String,
+    val imange: ImageView
+)
+fun get_wringn(){
+
+}
