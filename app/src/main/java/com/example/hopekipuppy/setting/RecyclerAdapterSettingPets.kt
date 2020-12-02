@@ -1,17 +1,20 @@
 package com.example.hopekipuppy.setting
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.hopekipuppy.MyPetFragment
 import com.example.hopekipuppy.R
-import com.example.hopekipuppy.title.Writing
-import timber.log.Timber
 
-class RecyclerAdapterSettingPets(val context: Context, val petList : ArrayList<Pet>) : RecyclerView.Adapter<RecyclerAdapterSettingPets.Holder>() {
+
+class RecyclerAdapterSettingPets(val context: Context, val petList: ArrayList<Pet>) : RecyclerView.Adapter<RecyclerAdapterSettingPets.Holder>() {
     override fun getItemCount(): Int {
         return petList.size
     }
@@ -32,18 +35,15 @@ class RecyclerAdapterSettingPets(val context: Context, val petList : ArrayList<P
         val pet_name = itemView?.findViewById<TextView>(R.id.tv_pet_name)
 
         fun bind(pet: Pet, context: Context) {
-//            if (pet.name != "") {
-//                val Id = context.resources.getIdentifier(
-//                    pet.name,
-//                    "drawable",
-//                    context.packageName
-//                )
-//                main_Image?.setImageResource(Id)
-//            } else {
-//                main_Image?.setImageResource(R.mipmap.ic_launcher)
-//            }
+            Glide.with(context)
+                    .load(pet.image)
+                    .into(pet_Image!!)
             pet_name?.text = pet.name
-            Timber.d(pet.name)
+            pet_Image.setOnClickListener {
+                MyPetFragment.petName = pet.name
+                val navController = Navigation.findNavController(itemView)
+                navController.navigate(SettingFragmentDirections.actionSettingFragmentToMyPetFragment())
+            }
         }
     }
 }

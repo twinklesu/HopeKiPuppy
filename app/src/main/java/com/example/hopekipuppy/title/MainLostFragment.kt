@@ -107,11 +107,6 @@ class MainLostFragment : Fragment() {
             Timber.d("test request fail")
         }
         queue.add(jsonArrayRequest)
-
-
-
-
-
         return binding.root
     }
 

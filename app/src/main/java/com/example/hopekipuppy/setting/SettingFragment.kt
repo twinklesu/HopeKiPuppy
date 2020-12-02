@@ -71,14 +71,13 @@ class SettingFragment : Fragment() {
                     val result_list = response
                     for (i in 0..response.length() - 1) {
                         val result = result_list.getJSONObject(i)
-                        val obj = Pet(result.getString("name"), result.getInt("age"), result.getString("variety"), result.getString("reg_num"), result.getString("character"))
+                        val obj = Pet(result.getString("name"), result.getInt("age"), result.getString("variety"), result.getString("image"), result.getString("reg_num"), result.getString("character"))
                         pet_list.add(obj)
                     }
                     val RecyclerAdapterSettingPets = RecyclerAdapterSettingPets(binding.recyclerPets.context, pet_list)
                     binding.recyclerPets.adapter = RecyclerAdapterSettingPets
                     val manager = LinearLayoutManager(binding.recyclerPets.context, RecyclerView.HORIZONTAL, false)
                     binding.recyclerPets.layoutManager = manager
-
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -98,4 +97,4 @@ class SettingFragment : Fragment() {
 
 }
 
-data class Pet(val name:String, val age: Int, val variety: String, var reg_num: String, var character: String)
+data class Pet(val name:String, val age: Int, val variety: String, val image: String, var reg_num: String, var character: String)
