@@ -136,7 +136,11 @@
         android:id="@+id/writeLostFragment"
         android:name="com.example.hopekipuppy.WriteLostFragment"
         android:label="fragment_write_lost"
-        tools:layout="@layout/fragment_write_lost" />
+        tools:layout="@layout/fragment_write_lost" >
+        <action
+            android:id="@+id/action_writeLostFragment_to_detailLostFragment"
+            app:destination="@id/detailLostFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myPetFragment"
         android:name="com.example.hopekipuppy.MyPetFragment"

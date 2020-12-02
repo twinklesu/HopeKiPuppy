@@ -89,7 +89,7 @@ class WriteLostFragment : Fragment() {
             parameter,
             {
                 Timber.d("Post SUCCESS")
-                findNavController().navigate(RegisterPetFragmentDirections.actionRegisterPetFragmentToMyPetFragment())
+                findNavController().navigate(WriteLostFragmentDirections.actionWriteLostFragmentToDetailLostFragment())
                 // 근데 navigate할 때 값 넘겨줘야 된디
 
             }
