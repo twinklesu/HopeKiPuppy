@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -47,10 +48,7 @@ class SettingFragment : Fragment() {
 
         binding.btRegPet.setOnClickListener { findNavController().navigate(SettingFragmentDirections.actionSettingFragmentToRegisterPetFragment()) }
         binding.btTemp.setOnClickListener {
-            val fragment = MyPetFragment()
-            val bundle = Bundle()
-            bundle.putString("pet_name", "Rooney")
-            fragment.arguments = bundle
+            MyPetFragment.petName = "Rooney"
             findNavController().navigate(SettingFragmentDirections.actionSettingFragmentToMyPetFragment())
         }
 

@@ -43,6 +43,11 @@
             android:id="@+id/action_settingFragment_to_registerPetFragment"
             app:destination="@id/registerPetFragment"
             app:popUpTo="@id/settingFragment" />
+        <argument
+            android:name="pet_name"
+            android:defaultValue=""
+            app:argType="string"
+            />
     </fragment>
     <fragment
         android:id="@+id/setKeywordFragment"
@@ -136,7 +141,13 @@
         android:id="@+id/myPetFragment"
         android:name="com.example.hopekipuppy.MyPetFragment"
         android:label="fragment_my_pet"
-        tools:layout="@layout/fragment_my_pet" />
+        tools:layout="@layout/fragment_my_pet" >
+        <argument
+            android:name="pet_name"
+            android:defaultValue=""
+            app:argType="string"
+            />
+    </fragment>
     <fragment
         android:id="@+id/registerPetFragment"
         android:name="com.example.hopekipuppy.RegisterPetFragment"
