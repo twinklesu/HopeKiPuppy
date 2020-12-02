@@ -13,14 +13,10 @@ import timber.log.Timber
 class MyPetFragment : Fragment() {
 
     private lateinit var binding : FragmentMyPetBinding
-    private lateinit var pet_name: String
+    private lateinit var petName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            pet_name = it.getString("pet_name").toString()
-            Timber.d(pet_name)
-        }
     }
 
     override fun onCreateView(

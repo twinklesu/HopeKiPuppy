@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +16,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.hopekipuppy.MainActivity
+import com.example.hopekipuppy.MyPetFragment
 import com.example.hopekipuppy.R
 import com.example.hopekipuppy.RegisterPetFragment
 import com.example.hopekipuppy.databinding.FragmentSettingBinding
@@ -42,11 +45,6 @@ class SettingFragment : Fragment() {
 
         binding.btRegPet.setOnClickListener { findNavController().navigate(SettingFragmentDirections.actionSettingFragmentToRegisterPetFragment()) }
         binding.btTemp.setOnClickListener {
-                SettingFragment().apply {
-                arguments = Bundle().apply {
-                    putString("pet_name", "Rooney")
-                }
-            }
             findNavController().navigate(SettingFragmentDirections.actionSettingFragmentToMyPetFragment())
         }
 
