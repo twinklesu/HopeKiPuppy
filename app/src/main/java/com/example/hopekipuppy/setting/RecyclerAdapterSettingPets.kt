@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hopekipuppy.R
 import com.example.hopekipuppy.title.Writing
+import timber.log.Timber
 
 class RecyclerAdapterSettingPets(val context: Context, val petList : ArrayList<Pet>) : RecyclerView.Adapter<RecyclerAdapterSettingPets.Holder>() {
     override fun getItemCount(): Int {
@@ -20,14 +21,15 @@ class RecyclerAdapterSettingPets(val context: Context, val petList : ArrayList<P
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view = LayoutInflater.from(context).inflate(R.layout.view_main_recycler, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.recycler_setting_pets, parent, false)
         return Holder(view)
     }
 
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
-        val pet_Image = itemView?.findViewById<ImageView>(R.id.main_image)
-        val pet_name = itemView?.findViewById<TextView>(R.id.main_text)
+
+        val pet_Image = itemView?.findViewById<ImageView>(R.id.image_pet)
+        val pet_name = itemView?.findViewById<TextView>(R.id.tv_pet_name)
 
         fun bind(pet: Pet, context: Context) {
 //            if (pet.name != "") {
@@ -41,6 +43,7 @@ class RecyclerAdapterSettingPets(val context: Context, val petList : ArrayList<P
 //                main_Image?.setImageResource(R.mipmap.ic_launcher)
 //            }
             pet_name?.text = pet.name
+            Timber.d(pet.name)
         }
     }
 }

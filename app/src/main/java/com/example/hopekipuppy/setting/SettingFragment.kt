@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -74,6 +76,8 @@ class SettingFragment : Fragment() {
                     }
                     val RecyclerAdapterSettingPets = RecyclerAdapterSettingPets(binding.recyclerPets.context, pet_list)
                     binding.recyclerPets.adapter = RecyclerAdapterSettingPets
+                    val manager = LinearLayoutManager(binding.recyclerPets.context, RecyclerView.HORIZONTAL, false)
+                    binding.recyclerPets.layoutManager = manager
 
                 } catch (e: JSONException) {
                     e.printStackTrace()
