@@ -8,13 +8,19 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.hopekipuppy.databinding.FragmentMyPetBinding
 import com.example.hopekipuppy.databinding.FragmentWriteFoundBinding
+import timber.log.Timber
 
 class MyPetFragment : Fragment() {
 
     private lateinit var binding : FragmentMyPetBinding
+    private lateinit var pet_name: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.let {
+            pet_name = it.getString("pet_name").toString()
+            Timber.d(pet_name)
+        }
     }
 
     override fun onCreateView(
@@ -22,6 +28,12 @@ class MyPetFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_pet, container, false)
+
+        getMyPet()
         return binding.root
+    }
+
+    private fun getMyPet() {
+
     }
 }

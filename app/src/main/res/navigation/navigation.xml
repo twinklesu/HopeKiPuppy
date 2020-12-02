@@ -141,5 +141,11 @@
         android:id="@+id/registerPetFragment"
         android:name="com.example.hopekipuppy.RegisterPetFragment"
         android:label="fragment_register_pet"
-        tools:layout="@layout/fragment_register_pet" />
+        tools:layout="@layout/fragment_register_pet" >
+        <action
+            android:id="@+id/action_registerPetFragment_to_myPetFragment"
+            app:destination="@id/myPetFragment"
+            app:popUpTo="@id/registerPetFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
