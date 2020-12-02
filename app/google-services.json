@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "488240346267",
+    "firebase_url": "https://hopekipuppy.firebaseio.com",
+    "project_id": "hopekipuppy",
+    "storage_bucket": "hopekipuppy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488240346267:android:8bed3cc034c3241600c23e",
+        "android_client_info": {
+          "package_name": "com.example.hopekipuppy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488240346267-i9q4ad3bc6ababkmv349jk618ansei6b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsU0GMXNCGWNVoTI2_zJEkX83mqbg0i74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488240346267-i9q4ad3bc6ababkmv349jk618ansei6b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

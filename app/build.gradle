@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id "androidx.navigation.safeargs"
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -59,6 +60,10 @@ dependencies {
     // location
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
+    // firebase store
+    implementation platform('com.google.firebase:firebase-bom:26.1.0')
+    implementation 'com.google.firebase:firebase-storage-ktx'
 
 
     testImplementation 'junit:junit:4.+'
