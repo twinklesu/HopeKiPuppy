@@ -45,11 +45,6 @@ class SettingFragment : Fragment() {
         binding.tvMyTown.text = MainActivity.login.user_town
         // 데이터 넘기기
 
-
-
-
-
-
         binding.btRegPet.setOnClickListener { findNavController().navigate(SettingFragmentDirections.actionSettingFragmentToRegisterPetFragment()) }
         binding.btTemp.setOnClickListener {
             val fragment = MyPetFragment()
@@ -57,7 +52,6 @@ class SettingFragment : Fragment() {
             bundle.putString("pet_name", "Rooney")
             fragment.arguments = bundle
             findNavController().navigate(SettingFragmentDirections.actionSettingFragmentToMyPetFragment())
-
         }
 
 

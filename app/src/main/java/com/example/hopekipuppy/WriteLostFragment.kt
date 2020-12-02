@@ -75,6 +75,7 @@ class WriteLostFragment : Fragment() {
         json["lost_loc"] = binding.etLostLocation.text.toString()
         json["lost_date"] = binding.etLostDate.text.toString()
         json["name"] = binding.etLostName.text.toString()
+        json["age"] = binding.etLostAge.text.toString()
         json["reg_num"] = binding.etLostRegNum.text.toString()
         json["phone_num"] = binding.etLostPhoneNum.text.toString()
         json["character"] = binding.etLostCharacter.text.toString()
