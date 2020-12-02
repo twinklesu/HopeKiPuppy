@@ -62,11 +62,6 @@ class MainLostFragment : Fragment() {
         }
 
 
-        val application = requireNotNull(this.activity).application
-
-
-        val viewModelFactory = SleepTrackerViewModelFactory(application)
-
 
         val LostAdapter = MainLostAdapter(binding.LostRecyclerView.context, writinglist)
         binding.LostRecyclerView.adapter = LostAdapter
