@@ -60,7 +60,7 @@ class RegisterPetFragment : Fragment() {
         }
 
         val queue = Volley.newRequestQueue(this.context)
-        val url = "http://awsdjango.eba-82andig8.ap-nodrtheast-2.elasticbeanstalk.com/reg-pet/"
+        val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/reg-pet/"
 
         val json = HashMap<String?, String?>()
 
@@ -79,13 +79,8 @@ class RegisterPetFragment : Fragment() {
             parameter,
             {
                 Timber.d("Post SUCCESS")
+                MyPetFragment.petName = binding.etPetName.text.toString()
                 findNavController().navigate(RegisterPetFragmentDirections.actionRegisterPetFragmentToMyPetFragment())
-                // 근데 navigate할 때 값 넘겨줘야 된디
-                RegisterPetFragment().apply {
-                    arguments = Bundle().apply {
-                        putString("pet_name", binding.etPetName.text.toString())
-                    }
-                }
             }
         ) { error ->
             error.printStackTrace()

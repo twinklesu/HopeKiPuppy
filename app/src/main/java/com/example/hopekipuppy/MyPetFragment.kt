@@ -18,7 +18,6 @@ import com.example.hopekipuppy.MainActivity.Companion.storage
 import com.example.hopekipuppy.databinding.FragmentMyPetBinding
 import com.example.hopekipuppy.databinding.FragmentWriteFoundBinding
 import com.example.hopekipuppy.setting.SettingFragment
-import com.example.hopekipuppy.setting.Test
 import org.json.JSONException
 import timber.log.Timber
 

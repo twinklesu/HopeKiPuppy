@@ -27,8 +27,8 @@ import timber.log.Timber
 
 
 class SettingFragment : Fragment() {
-    private lateinit var binding : FragmentSettingBinding
-    private lateinit var petAdapter : RecyclerView.Adapter<*>
+    private lateinit var binding: FragmentSettingBinding
+    private lateinit var petAdapter: RecyclerView.Adapter<*>
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +53,35 @@ class SettingFragment : Fragment() {
         }
 
 
+        // pet 목록 가져오기
+        val queue: RequestQueue = Volley.newRequestQueue(this.context)
+        val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/get-pet-list/${MainActivity.login.id}/"
+        val pet_list: ArrayList<Pet> = ArrayList()
+
+        val jsonArrayRequest = JsonArrayRequest(
+            Request.Method.GET,
+            url,
+            null,
+            { response ->
+                try {
+                    val result_list = response
+                    for (i in 0..response.length() - 1) {
+                        val result = result_list.getJSONObject(i)
+                        val obj = Pet(result.getString("name"), result.getInt("age"), result.getString("variety"), result.getString("reg_num"), result.getString("character"))
+                        pet_list.add(obj)
+                    }
+                    // 여기서
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }
+        ) {
+            it.printStackTrace()
+            Timber.d("test request fail")
+        }
+        queue.add(jsonArrayRequest)
+
+
         // pet recycler view
         petAdapter = RecyclerAdapterSettingPets()
         recyclerView = binding.recyclerPets.apply {
@@ -60,41 +89,11 @@ class SettingFragment : Fragment() {
             // specify an viewAdapter
             adapter = petAdapter
         }
-
-        volley_test()
         return binding.root
     }
 
 
-    private fun volley_test() {
-        val queue: RequestQueue = Volley.newRequestQueue(this.context)
-        val url_test = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/test/"
-        var test_result: ArrayList<Test> = ArrayList()
 
-        val jsonArrayRequest = JsonArrayRequest(
-            Request.Method.GET,
-            url_test,
-            null,
-            { response ->
-                try {
-                    val result_list = response
-                    for (i in 0..response.length()-1) {
-                        val result = result_list.getJSONObject(i)
-                        val test_obj = Test(result.getInt("id") , result.getString("test"))
-                        test_result.add(test_obj)
-                        Timber.d(test_obj.toString())
-                    }
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-            }
-        ) {
-            it.printStackTrace()
-            Timber.d("test request fail") }
-
-        queue.add(jsonArrayRequest)
-        Timber.d(test_result.toString())
-    }
 }
 
-data class Test(val id: Int, val test: String)
+data class Pet(val name:String, val age: Int, val variety: String, var reg_num: String, var character: String)
