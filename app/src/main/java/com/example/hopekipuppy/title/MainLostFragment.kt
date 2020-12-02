@@ -16,10 +16,16 @@ import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
 import com.example.hopekipuppy.MainActivity
 import com.example.hopekipuppy.R
 import com.example.hopekipuppy.databinding.FragmentMainLostBinding
+import com.example.hopekipuppy.setting.Pet
 import com.google.android.gms.location.*
+import org.json.JSONException
 import timber.log.Timber
 import java.io.IOException
 import java.util.*
@@ -73,6 +79,38 @@ class MainLostFragment : Fragment() {
 
         getLoc()
         binding.DongText.text = MainActivity.login.user_town
+
+        // lost 목록 가져오기
+        val queue: RequestQueue = Volley.newRequestQueue(this.context)
+        val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/get-lost-list/"
+        val lost_list: ArrayList<LostSimple> = ArrayList()
+
+        val jsonArrayRequest = JsonArrayRequest(
+            Request.Method.GET,
+            url,
+            null,
+            { response ->
+                try {
+                    val result_list = response
+                    for (i in 0..response.length() - 1) {
+                        val result = result_list.getJSONObject(i)
+                        val obj = LostSimple(result.getInt("post_id"), result.getString("title"), result.getString("image"))
+                        lost_list.add(obj)
+                    }
+                    // 여기서
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }
+        ) {
+            it.printStackTrace()
+            Timber.d("test request fail")
+        }
+        queue.add(jsonArrayRequest)
+
+
+
+
 
         return binding.root
     }
@@ -129,3 +167,5 @@ class MainLostFragment : Fragment() {
         }
     }
 }
+
+data class LostSimple(val post_id: Int, val title: String, val image: String)
