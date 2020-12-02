@@ -28,7 +28,7 @@ class MyPetFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_pet, container, false)
 
-        getMyPet()
+
         return binding.root
     }
 

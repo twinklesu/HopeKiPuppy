@@ -3,114 +3,118 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <FrameLayout
+
+    <!-- TODO: Update blank fragment layout -->
+    <data>
+        <variable
+            name="LostViewModel"
+            type="com.example.hopekipuppy.title.LostViewModel" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".TitleFragment">
+        android:orientation="vertical">
 
-        <!-- TODO: Update blank fragment layout -->
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <LinearLayout
+
+            <Button
+                android:id="@+id/Lost_Write_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="LOST" />
+
+            <TextView
+                android:id="@+id/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="LOST OR FOUND" />
+
+            <Button
+                android:id="@+id/Found_Write_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Found" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/DongText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dong" />
+
+            <Button
+                android:id="@+id/Set_Keyword_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#" />
+
+            <Button
+                android:id="@+id/Setting_Go_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="톱니바퀴모양"
+                android:layout_gravity="end"/>
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="635dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Lost_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <Button
-                    android:id="@+id/Lost_Write_Button"
+                    android:id="@+id/Lost_Go_Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="LOST" />
 
-                <TextView
-                    android:id="@+id/Title"
+                <Button
+                    android:id="@+id/Found_Go_Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="LOST OR FOUND" />
-
-                <Button
-                    android:id="@+id/Found_Write_Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Button" />
+                    android:text="FOUND" />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/DongText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dong" />
-
-                <Button
-                    android:id="@+id/Set_Keyword_Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="#" />
-
-                <Button
-                    android:id="@+id/Setting_Go_Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="톱니바퀴모양"
-                    android:layout_gravity="end"/>
-            </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="635dp">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/Lost_recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                </androidx.recyclerview.widget.RecyclerView>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="bottom"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                    <Button
-                        android:id="@+id/Lost_Go_Button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="LOST" />
-
-                    <Button
-                        android:id="@+id/Found_Go_Button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="FOUND" />
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
-        </LinearLayout>
-
-    </FrameLayout>
 </layout>

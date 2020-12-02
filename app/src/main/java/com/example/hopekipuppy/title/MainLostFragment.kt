@@ -44,8 +44,6 @@ class MainLostFragment : Fragment() {
             R.layout.fragment_main_lost, container, false)
 
 
-        viewModel = ViewModelProvider(this).get(LostViewModel::class.java)
-
         //버튼 프래그먼트 연결
         binding.FoundGoButton.setOnClickListener {
             findNavController().navigate(MainLostFragmentDirections.actionMainLostFragmentToMainFoundFragment())
@@ -62,6 +60,12 @@ class MainLostFragment : Fragment() {
         binding.SetKeywordButton.setOnClickListener {
             findNavController().navigate(MainLostFragmentDirections.actionMainLostFragmentToSetKeywordFragment())
         }
+
+
+        val application = requireNotNull(this.activity).application
+
+
+        val viewModelFactory = SleepTrackerViewModelFactory(application)
 
 
         val LostAdapter = MainLostAdapter(binding.LostRecyclerView.context, writinglist)
