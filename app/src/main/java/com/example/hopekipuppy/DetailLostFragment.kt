@@ -141,12 +141,6 @@ class DetailLostFragment : Fragment() {
 
 
 
-
-
-
-
-
-
         return binding.root
     }
 
