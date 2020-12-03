@@ -68,6 +68,9 @@ class SetLocationFragment : Fragment() {
             WriteLostFragment.addr = addr.toString()
             WriteLostFragment.lat = lat
             WriteLostFragment.long = long
+            WriteFoundFragment.addr = addr.toString()
+            WriteFoundFragment.lat = lat
+            WriteFoundFragment.long = long
             val ft = requireFragmentManager()
             ft.beginTransaction().detach(this).commit()
             ft.popBackStack()
