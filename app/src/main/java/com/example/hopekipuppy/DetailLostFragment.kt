@@ -109,10 +109,7 @@ class DetailLostFragment : Fragment() {
                             val result_list = response
                             for (i in 0..response.length() - 1) {
                                 val result = result_list.getJSONObject(i)
-                                val obj =
-                                        Comment(
-                                                result.getString("user_id"), result.getString("comment")
-                                        )
+                                val obj = Comment(result.getString("user_id"), result.getString("comment"))
                                 comment_list.add(obj)
                             }
                             Timber.d(comment_list.toString())
@@ -128,7 +125,7 @@ class DetailLostFragment : Fragment() {
             ) {
                 it.printStackTrace()
                 Timber.d("request fail") }
-            queue.add(jsonObjectRequest)
+            queue.add(jsonArrayRequest)
         }
 
         // 댓글 작성
