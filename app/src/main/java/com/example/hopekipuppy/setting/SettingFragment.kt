@@ -130,7 +130,10 @@ class SettingFragment : Fragment() {
                                     result.getString("found_date"), result.getString("detail"), result.getString("image"))
                             my_found_list.add(obj)
                         }
-                        // recycler 여기에
+                        val RecyclerAdapterMyFound = RecyclerAdapterMyFound(binding.recyclerPostLost.context, my_found_list)
+                        binding.recyclerPostFound.adapter = RecyclerAdapterMyFound
+                        val manager = LinearLayoutManager(binding.recyclerPostFound.context)
+                        binding.recyclerPostFound.layoutManager = manager
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }
@@ -140,8 +143,6 @@ class SettingFragment : Fragment() {
             Timber.d("test request fail")
         }
         queue.add(jsonArrayRequest)
-
-
 
         return binding.root
     }

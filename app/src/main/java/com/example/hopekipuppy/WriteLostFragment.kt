@@ -32,7 +32,6 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.hopekipuppy.databinding.FragmentRegisterPetBinding
 import com.example.hopekipuppy.databinding.FragmentWriteLostBinding
 import com.example.hopekipuppy.setting.Pet
 import com.example.hopekipuppy.setting.RecyclerAdapterSettingPets
@@ -47,7 +46,7 @@ import kotlin.properties.Delegates
 class WriteLostFragment : Fragment() {
 
     private lateinit var binding : FragmentWriteLostBinding
-    private lateinit var petImageUrl : String
+    lateinit var petImageUrl : String
     private lateinit var cal : Calendar
 
     companion object{

@@ -7,17 +7,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hopekipuppy.DetailFoundFragment
 import com.example.hopekipuppy.DetailLostFragment
 import com.example.hopekipuppy.R
+import com.example.hopekipuppy.title.Found
 import com.example.hopekipuppy.title.LostSimple
 
-class RecyclerAdapterMyLost(val context: Context, val lostSimple: ArrayList<LostSimple>) : RecyclerView.Adapter<RecyclerAdapterMyLost.Holder>() {
+class RecyclerAdapterMyFound (val context: Context, val found: ArrayList<Found>) : RecyclerView.Adapter<RecyclerAdapterMyFound.Holder>() {
     override fun getItemCount(): Int {
-        return lostSimple.size
+        return found.size
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder?.bind(lostSimple[position], context)
+        holder?.bind(found[position], context)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -30,13 +32,13 @@ class RecyclerAdapterMyLost(val context: Context, val lostSimple: ArrayList<Lost
 
         val writing_title = itemView?.findViewById<TextView>(R.id.setting_my_lost_writing)
 
-        fun bind(writing: LostSimple, context: Context) {
+        fun bind(writing: Found, context: Context) {
 
             writing_title?.text = writing.title
             writing_title?.setOnClickListener {
-                DetailLostFragment.lostSimple = writing
+                DetailFoundFragment.found = writing
                 val navController = Navigation.findNavController(itemView)
-                navController.navigate(SettingFragmentDirections.actionSettingFragmentToDetailLostFragment())
+                navController.navigate(SettingFragmentDirections.actionSettingFragmentToDetailFoundFragment())
             }
         }
     }
