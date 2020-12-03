@@ -49,7 +49,7 @@ class DetailFoundFragment : Fragment() {
             }
         }
 
-        if(found.post_id.isNullOrEmpty()) {
+        if(found.post_id == null) {
             Glide.with(this.requireContext())
                     .load(found.image)
                     .into(binding.ivTest)
