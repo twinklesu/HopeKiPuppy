@@ -3,6 +3,7 @@ package com.example.hopekipuppy.title
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
 import android.location.LocationManager
@@ -40,6 +41,9 @@ class MainLostFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_main_lost, container, false)
+
+        binding.LostGoButton.setBackgroundColor(Color.WHITE)
+        binding.LostGoButton.setTextColor(Color.BLACK)
 
 
         //버튼 프래그먼트 연결
