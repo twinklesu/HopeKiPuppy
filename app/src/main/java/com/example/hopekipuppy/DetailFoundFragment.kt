@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
@@ -27,7 +28,7 @@ class DetailFoundFragment : Fragment() {
     private lateinit var binding : FragmentDetailFoundBinding
 
     companion object{
-        lateinit var found: Found
+        var found: Found? = null
     }
 
 
@@ -43,37 +44,37 @@ class DetailFoundFragment : Fragment() {
         //댓글쓰기
         binding.btComment.setOnClickListener {
             if (binding.etComment.text.isNotBlank()){
-                writeComment(DetailLostFragment.lostSimple!!.post_id, MainActivity.login.id, binding.etComment.text.toString())
+                writeComment(found!!.post_id, MainActivity.login.id, binding.etComment.text.toString())
             }
             else {
                 Toast.makeText(this.context, "No comment to write", Toast.LENGTH_SHORT).show()
             }
         }
 
-        if(found.post_id == null) {
+        if(found?.post_id == null) {
             Glide.with(this.requireContext())
-                    .load(found.image)
-                    .into(binding.ivTest)
-            binding.tvPostTitle.text = found.title
-            binding.tvFoundLocation.text = found.found_loc
-            binding.tvFoundDate.text = found.found_date
-            binding.tvFoundDetail.text = found.detail
+                    .load(found!!.image)
+                    .into(binding.ivImage)
+            binding.tvPostTitle.text = found!!.title
+            binding.tvFoundLocation.text = found!!.found_loc
+            binding.tvFoundDate.text = found!!.found_date
+            binding.tvFoundDetail.text = found!!.detail
         }
         else {
             val queue: RequestQueue = Volley.newRequestQueue(this.context)
-            binding.linearComment.visibility = View.VISIBLE
+            binding.linaerComment.visibility = View.VISIBLE
             // 글 가져오기
             Glide.with(this.requireContext())
-                    .load(found.image)
-                    .into(binding.ivTest)
-            binding.tvPostTitle.text = found.title
-            binding.tvFoundLocation.text = found.found_loc
-            binding.tvFoundDate.text = found.found_date
-            binding.tvFoundDetail.text = found.detail
+                    .load(found!!.image)
+                    .into(binding.ivImage)
+            binding.tvPostTitle.text = found!!.title
+            binding.tvFoundLocation.text = found!!.found_loc
+            binding.tvFoundDate.text = found!!.found_date
+            binding.tvFoundDetail.text = found!!.detail
             /*
             댓글 받아오기
              */
-            val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/get-lost-comment/${found.post_id}"
+            val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/get-found-comment/${found!!.post_id}"
             val comment_list: ArrayList<Comment> = ArrayList()
 
             val jsonArrayRequest = JsonArrayRequest(
@@ -89,7 +90,11 @@ class DetailFoundFragment : Fragment() {
                                 comment_list.add(obj)
                             }
                             Timber.d(comment_list.toString())
-                            // 여기 댓글 recycler
+                            val RecyclerAdapterFoundComments = RecyclerAdapterFoundComments(binding.recyclerComments.context, comment_list)
+                            binding.recyclerComments.adapter = RecyclerAdapterFoundComments
+                            val manager = LinearLayoutManager(binding.recyclerComments.context)
+                            binding.recyclerComments.layoutManager = manager
+
                         } catch (e: JSONException) {
                         } catch (e: JSONException) {
                             e.printStackTrace()
@@ -104,7 +109,7 @@ class DetailFoundFragment : Fragment() {
     }
 
 
-    private fun writeComment(post_id: Int, user_id:String, comment:String){
+    private fun writeComment(post_id: Int?, user_id:String, comment:String){
 
         val queue = Volley.newRequestQueue(this.context)
         val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/write-comment-found/"
@@ -122,7 +127,7 @@ class DetailFoundFragment : Fragment() {
                 parameter,
                 {
                     Timber.d("Post SUCCESS")
-                    findNavController().navigate(DetailLostFragmentDirections.actionDetailLostFragmentSelf())
+                    findNavController().navigate(DetailFoundFragmentDirections.actionDetailFoundFragmentSelf())
                 }
         ) { error ->
             error.printStackTrace()
