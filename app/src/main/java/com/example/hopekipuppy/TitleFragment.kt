@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class TitleFragment : Fragment() {
 
-    val SPLASH_VIEW_TIME: Long = 2000 //2초간 스플래시 화면을 보여줌 (ms)
+    val SPLASH_VIEW_TIME: Long = 1500 //2초간 스플래시 화면을 보여줌 (ms)
 
     private lateinit var binding : FragmentTitleBinding
 
