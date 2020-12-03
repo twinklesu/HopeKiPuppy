@@ -16,6 +16,7 @@ import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.example.hopekipuppy.databinding.FragmentDetailFoundBinding
 import com.example.hopekipuppy.databinding.FragmentDetailLostBinding
+import com.example.hopekipuppy.title.Found
 import org.json.JSONException
 import org.json.JSONObject
 import timber.log.Timber

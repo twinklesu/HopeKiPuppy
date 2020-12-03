@@ -14,7 +14,6 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
-import com.example.hopekipuppy.Found
 import com.example.hopekipuppy.MainActivity
 import com.example.hopekipuppy.R
 import com.example.hopekipuppy.databinding.FragmentMainFoundBinding
@@ -73,7 +72,11 @@ class MainFoundFragment : Fragment() {
                                     result.getString("found_date"), result.getString("detail"), result.getString("image"))
                             found_list.add(obj)
                         }
-                        // recycler view 여기에
+                        val LostAdapter = MainFoundAdapter(binding.FoundRecyclerView.context, found_list)
+                        binding.FoundRecyclerView.adapter = LostAdapter
+                        val Gm = GridLayoutManager(binding.FoundRecyclerView.context,2)
+                        binding.FoundRecyclerView.layoutManager = Gm
+                        binding.FoundRecyclerView.setHasFixedSize(true)
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }
@@ -88,3 +91,4 @@ class MainFoundFragment : Fragment() {
         return binding.root
     }
 }
+data class Found(var post_id: Int?, val title:String, val found_loc :String, val found_date : String,val detail:String, val image:String)

@@ -22,6 +22,7 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.hopekipuppy.*
 import com.example.hopekipuppy.databinding.FragmentSettingBinding
+import com.example.hopekipuppy.title.Found
 import com.example.hopekipuppy.title.LostSimple
 import com.example.hopekipuppy.title.MainLostAdapter
 import org.json.JSONException

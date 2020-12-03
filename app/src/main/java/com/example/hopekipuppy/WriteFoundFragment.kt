@@ -22,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.hopekipuppy.databinding.FragmentWriteFoundBinding
 import com.example.hopekipuppy.databinding.FragmentWriteLostBinding
+import com.example.hopekipuppy.title.Found
 import org.json.JSONObject
 import timber.log.Timber
 import java.util.*
@@ -154,4 +155,3 @@ class WriteFoundFragment : Fragment() {
 
 }
 
-data class Found(var post_id: Int?, val title:String, val found_loc :String, val found_date : String,val detail:String, val image:String)
