@@ -1,4 +1,4 @@
-package com.example.hopekipuppy.title
+package com.example.hopekipuppy.title.Lost
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

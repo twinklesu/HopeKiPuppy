@@ -1,4 +1,4 @@
-package com.example.hopekipuppy.title
+package com.example.hopekipuppy.title.Lost
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,10 +10,9 @@ import androidx.navigation.Navigation
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.hopekipuppy.DetailLostFragment
-import com.example.hopekipuppy.MyPetFragment
+import com.example.hopekipuppy.Detail.Lost.DetailLostFragment
 import com.example.hopekipuppy.R
-import com.example.hopekipuppy.setting.SettingFragmentDirections
+import com.example.hopekipuppy.title.MainLostFragmentDirections
 import java.util.ArrayList
 
 class MainLostAdapter(val context: Context, val lostList: ArrayList<LostSimple>) : RecyclerView.Adapter<MainLostAdapter.Holder>() {

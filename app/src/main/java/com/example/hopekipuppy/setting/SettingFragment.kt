@@ -1,19 +1,12 @@
 package com.example.hopekipuppy.setting
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.HorizontalScrollView
-import android.widget.ImageView
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -21,12 +14,9 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.hopekipuppy.MainActivity
-import com.example.hopekipuppy.MyPetFragment
 import com.example.hopekipuppy.R
-import com.example.hopekipuppy.RegisterPetFragment
 import com.example.hopekipuppy.databinding.FragmentSettingBinding
-import com.example.hopekipuppy.title.LostSimple
-import com.example.hopekipuppy.title.MainLostAdapter
+import com.example.hopekipuppy.title.Lost.LostSimple
 import org.json.JSONException
 import timber.log.Timber
 
@@ -97,7 +87,12 @@ class SettingFragment : Fragment() {
                         val result_list = response
                         for (i in 0..response.length() - 1) {
                             val result = result_list.getJSONObject(i)
-                            val obj = LostSimple(result.getInt("post_id"),  result.getString("title"), result.getString("image"))
+                            val obj =
+                                LostSimple(
+                                    result.getInt("post_id"),
+                                    result.getString("title"),
+                                    result.getString("image")
+                                )
                             my_lost_list.add(obj)
                         }
                         val RecyclerAdapterMyLost = RecyclerAdapterMyLost(binding.recyclerPostLost.context, my_lost_list)

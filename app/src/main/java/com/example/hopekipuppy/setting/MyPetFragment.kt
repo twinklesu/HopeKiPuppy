@@ -1,4 +1,4 @@
-package com.example.hopekipuppy
+package com.example.hopekipuppy.setting
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,8 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
+import com.example.hopekipuppy.MainActivity
+import com.example.hopekipuppy.R
 import com.example.hopekipuppy.databinding.FragmentMyPetBinding
 import org.json.JSONException
 import timber.log.Timber
@@ -32,7 +34,8 @@ class MyPetFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_pet, container, false)
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_my_pet, container, false)
 
         getMyPet()
 
@@ -41,7 +44,7 @@ class MyPetFragment : Fragment() {
 
     private fun getMyPet() {
         val queue: RequestQueue = Volley.newRequestQueue(this.context)
-        val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/get-pet/${MainActivity.login.id}/${petName}/"
+        val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/get-pet/${MainActivity.login.id}/$petName/"
 
         val jsonArrayRequest = JsonArrayRequest(
             Request.Method.GET,

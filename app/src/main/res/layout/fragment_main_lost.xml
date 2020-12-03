@@ -8,7 +8,7 @@
     <data>
         <variable
             name="LostViewModel"
-            type="com.example.hopekipuppy.title.LostViewModel" />
+            type="com.example.hopekipuppy.title.Lost.LostViewModel" />
 
     </data>
 

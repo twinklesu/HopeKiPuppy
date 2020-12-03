@@ -4,14 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hopekipuppy.DetailLostFragment
-import com.example.hopekipuppy.MyPetFragment
+import com.example.hopekipuppy.Detail.Lost.DetailLostFragment
 import com.example.hopekipuppy.R
-import com.example.hopekipuppy.title.LostSimple
+import com.example.hopekipuppy.title.Lost.LostSimple
 
 class RecyclerAdapterMyLost(val context: Context, val lostSimple: ArrayList<LostSimple>) : RecyclerView.Adapter<RecyclerAdapterMyLost.Holder>() {
     override fun getItemCount(): Int {

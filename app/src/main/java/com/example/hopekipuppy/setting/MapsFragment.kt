@@ -1,14 +1,14 @@
-package com.example.hopekipuppy
+package com.example.hopekipuppy.setting
 
 import android.location.Address
 import android.location.Geocoder
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.hopekipuppy.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -17,10 +17,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import timber.log.Timber
 import java.io.IOException
 import java.util.*
-import kotlin.properties.Delegates
 
 @Suppress("DEPRECATION")
 class MapsFragment : Fragment() {
