@@ -144,7 +144,9 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_writeLostFragment_to_setLocationFragment"
-            app:destination="@id/setLocationFragment" />
+            app:destination="@id/setLocationFragment"
+            app:popUpTo="@id/writeLostFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/myPetFragment"
@@ -171,11 +173,5 @@
     <fragment
         android:id="@+id/setLocationFragment"
         android:name="com.example.hopekipuppy.SetLocationFragment"
-        android:label="SetLocationFragment" >
-        <action
-            android:id="@+id/action_setLocationFragment_to_writeLostFragment"
-            app:destination="@id/writeLostFragment"
-            app:popUpTo="@id/setLocationFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+        android:label="SetLocationFragment" />
 </navigation>

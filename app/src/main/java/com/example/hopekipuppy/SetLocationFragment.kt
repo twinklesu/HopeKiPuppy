@@ -1,24 +1,16 @@
 package com.example.hopekipuppy
 
 import android.content.Context
-import android.hardware.SensorManager
-import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.annotation.RequiresPermission
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.FragmentManager
 import com.example.hopekipuppy.databinding.FragmentSetLocationBinding
-import com.example.hopekipuppy.title.LostSimple
-import timber.log.Timber
-import java.util.*
 import kotlin.properties.Delegates
 
 
@@ -47,14 +39,14 @@ class SetLocationFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_set_location,
-            container,
-            false
+                inflater,
+                R.layout.fragment_set_location,
+                container,
+                false
         )
 
         binding.btSearch.setOnClickListener{
@@ -76,7 +68,9 @@ class SetLocationFragment : Fragment() {
             WriteLostFragment.addr = addr.toString()
             WriteLostFragment.lat = lat
             WriteLostFragment.long = long
-            findNavController().navigate(SetLocationFragmentDirections.actionSetLocationFragmentToWriteLostFragment())
+            val ft = requireFragmentManager()
+            ft.beginTransaction().detach(this).commit()
+            ft.popBackStack()
         }
 
 

@@ -29,6 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/black"
                 android:text="LOST" />
 
             <TextView
@@ -36,12 +37,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="LOST OR FOUND" />
+                android:textSize="25sp"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:text="LOST" />
 
             <Button
                 android:id="@+id/Found_Write_Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
                 android:layout_weight="1"
                 android:text="Found" />
         </LinearLayout>
@@ -53,27 +59,35 @@
 
             <TextView
                 android:id="@+id/DongText"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginEnd="150dp"
                 android:text="Dong" />
 
             <Button
                 android:id="@+id/Set_Keyword_Button"
-                android:layout_width="wrap_content"
+                android:layout_width="49dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:textSize="20dp"
+                android:backgroundTint="@color/black"
                 android:text="#" />
 
             <Button
                 android:id="@+id/Setting_Go_Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="톱니바퀴모양"
-                android:layout_gravity="end"/>
+                android:layout_gravity="end"
+                android:backgroundTint="@color/black"
+                android:text="setting" />
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="635dp">
+            android:layout_height="735dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Lost_recyclerView"
@@ -102,6 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/black"
                     android:text="LOST" />
 
                 <Button
@@ -109,6 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/black"
                     android:text="FOUND" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
