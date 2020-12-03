@@ -76,7 +76,7 @@
             android:id="@+id/action_mainLostFragment_to_detailLostFragment"
             app:destination="@id/detailLostFragment"
             app:popUpTo="@id/mainLostFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_mainLostFragment_to_writeFoundFragment"
             app:destination="@id/writeFoundFragment"

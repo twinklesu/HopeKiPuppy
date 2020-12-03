@@ -6,18 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.hopekipuppy.DetailLostFragment
+import com.example.hopekipuppy.MyPetFragment
 import com.example.hopekipuppy.R
+import com.example.hopekipuppy.setting.SettingFragmentDirections
+import java.util.ArrayList
 
-class MainLostAdapter(val context: Context, val writingList : ArrayList<Writing>) : RecyclerView.Adapter<MainLostAdapter.Holder>() {
+class MainLostAdapter(val context: Context, val lostList: ArrayList<LostSimple>) : RecyclerView.Adapter<MainLostAdapter.Holder>() {
 
     override fun getItemCount(): Int {
-        return writingList.size
+        return lostList.size
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder?.bind(writingList[position], context)
+        holder?.bind(lostList[position], context)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -30,18 +36,16 @@ class MainLostAdapter(val context: Context, val writingList : ArrayList<Writing>
         val main_Image = itemView?.findViewById<ImageView>(R.id.main_image)
         val main_Text = itemView?.findViewById<TextView>(R.id.main_text)
 
-        fun bind(writing: Writing, context: Context) {
-            if (writing.main_image != "") {
-                val Id = context.resources.getIdentifier(
-                    writing.main_image,
-                    "drawable",
-                    context.packageName
-                )
-                main_Image?.setImageResource(Id)
-            } else {
-                main_Image?.setImageResource(R.mipmap.ic_launcher)
+        fun bind(lost: LostSimple, context: Context) {
+            Glide.with(context)
+                    .load(lost.image)
+                    .into(main_Image!!)
+            main_Text?.text = lost.title
+            main_Image.setOnClickListener {
+                DetailLostFragment.lostSimple = lost
+                val navController = Navigation.findNavController(itemView)
+                navController.navigate(MainLostFragmentDirections.actionMainLostFragmentToDetailLostFragment())
             }
-            main_Text?.text = writing.main_text
         }
     }
 }

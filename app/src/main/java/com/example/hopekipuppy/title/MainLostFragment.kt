@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -23,7 +22,6 @@ import com.android.volley.toolbox.Volley
 import com.example.hopekipuppy.MainActivity
 import com.example.hopekipuppy.R
 import com.example.hopekipuppy.databinding.FragmentMainLostBinding
-import com.example.hopekipuppy.setting.Pet
 import com.google.android.gms.location.*
 import org.json.JSONException
 import timber.log.Timber
@@ -36,12 +34,6 @@ class MainLostFragment : Fragment() {
     private lateinit var binding : FragmentMainLostBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
-
-    var writinglist = arrayListOf<Writing>(
-        Writing("common","test title"),
-        Writing("common1","test title_2"),
-        Writing("common3","test title_3")
-    )
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -69,12 +61,7 @@ class MainLostFragment : Fragment() {
 
 
 
-        val LostAdapter = MainLostAdapter(binding.LostRecyclerView.context, writinglist)
-        binding.LostRecyclerView.adapter = LostAdapter
 
-        val Gm = GridLayoutManager(binding.LostRecyclerView.context,2)
-        binding.LostRecyclerView.layoutManager = Gm
-        binding.LostRecyclerView.setHasFixedSize(true)
 
 
         getLoc()
@@ -97,7 +84,11 @@ class MainLostFragment : Fragment() {
                         val obj = LostSimple(result.getInt("post_id"), result.getString("title"), result.getString("image"))
                         lost_list.add(obj)
                     }
-                    // 여기서
+                    val LostAdapter = MainLostAdapter(binding.LostRecyclerView.context, lost_list)
+                    binding.LostRecyclerView.adapter = LostAdapter
+                    val Gm = GridLayoutManager(binding.LostRecyclerView.context,2)
+                    binding.LostRecyclerView.layoutManager = Gm
+                    binding.LostRecyclerView.setHasFixedSize(true)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }

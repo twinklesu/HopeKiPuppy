@@ -29,19 +29,18 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/et_post_title"
+                    android:id="@+id/tv_post_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Get the title"
                     android:textColor="@color/black" />
 
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/iv_test"
+                android:id="@+id/iv_image"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:layout_gravity="center_horizontal"
                 tools:srcCompat="@tools:sample/avatars" />
 
@@ -61,11 +60,10 @@
                     android:textColor="@color/black"
                     android:textSize="20sp" />
                 <TextView
-                    android:id="@+id/et_lost_location"
+                    android:id="@+id/tv_lost_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Get the location"
                     android:textColor="@color/black" />
             </LinearLayout>
 
@@ -84,7 +82,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/et_lost_date"
+                    android:id="@+id/tv_lost_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -107,11 +105,10 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/et_lost_name"
+                    android:id="@+id/tv_lost_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Input name of pet"
                     android:inputType="textPersonName"
                     android:textColor="@color/black" />
             </LinearLayout>
@@ -131,11 +128,10 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/et_lost_age"
+                    android:id="@+id/tv_lost_age"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Input age of pet"
                     android:inputType="number"
                     android:textColor="@color/black" />
             </LinearLayout>
@@ -155,12 +151,11 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/et_lost_reg_num"
+                    android:id="@+id/tv_lost_reg_num"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="clip_vertical"
                     android:ems="10"
-                    android:hint="Input registration number"
                     android:inputType="textPersonName"
                     android:textColor="@color/black" />
             </LinearLayout>
@@ -180,12 +175,11 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/et_lost_phone_num"
+                    android:id="@+id/tv_lost_phone_num"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:ems="10"
-                    android:hint="010-0000-0000"
                     android:textColor="@color/black" />
             </LinearLayout>
 
@@ -205,11 +199,10 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/et_lost_character"
+                    android:id="@+id/tv_lost_character"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="get detail information"
                     android:gravity="start|top"
                     android:textColor="@color/black" />
             </LinearLayout>
