@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import com.example.hopekipuppy.R
 import com.example.hopekipuppy.Writing.Lost.WriteLostFragment
 import com.example.hopekipuppy.databinding.FragmentSetLocationBinding
-import com.example.hopekipuppy.title.Lost.MapsFragment
 import kotlin.properties.Delegates
 
 
