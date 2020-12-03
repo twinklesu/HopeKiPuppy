@@ -3,6 +3,7 @@ package com.example.hopekipuppy
 import android.Manifest
 import android.app.Activity
 import android.app.Activity.RESULT_OK
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -15,6 +16,8 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -32,11 +35,20 @@ import timber.log.Timber
 import java.io.File
 import java.sql.Time
 import java.util.*
+import kotlin.properties.Delegates
 
 class WriteLostFragment : Fragment() {
 
     private lateinit var binding : FragmentWriteLostBinding
     private lateinit var petImageUrl : String
+    private lateinit var cal : Calendar
+
+    companion object{
+        var lat : Double = 0.0
+        var long: Double = 0.0
+        var addr: String = ""
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,16 +64,26 @@ class WriteLostFragment : Fragment() {
             container,
             false
         )
+        cal = Calendar.getInstance()
 
         binding.btBringImage.setOnClickListener { selectGallery() }
-        binding.etLostLocation.setOnClickListener { findNavController().navigate(WriteLostFragmentDirections.actionWriteLostFragmentToSetLocationFragment())}
+        // 장소가져오기
+        binding.tvLostLocation.setOnClickListener { findNavController().navigate(WriteLostFragmentDirections.actionWriteLostFragmentToSetLocationFragment())}
+        binding.tvLostLocation.text = addr
+        // 날짜 가져오기
+        binding.tvLostDate.setOnClickListener{showDatePicker(binding.tvLostDate)}
+
+
+
         binding.lostWritePost.setOnClickListener { registerMyLostWriting() }
+
+
         return binding.root
     }
 
     private fun registerMyLostWriting(){
-        // 이름이랑 나이 없으면 안됨
-        if (binding.etPostTitle.text.isNullOrEmpty() || binding.etLostLocation.text.isNullOrEmpty()) {
+        // 이름이랑 장소 없으면 안됨
+        if (binding.etPostTitle.text.isNullOrEmpty() || binding.tvLostLocation.text.isNullOrEmpty()) {
             Toast.makeText(this.context, "Title and Location are mandatory", Toast.LENGTH_SHORT).show()
             return
         }
@@ -73,8 +95,8 @@ class WriteLostFragment : Fragment() {
 
         json["user_id"] = MainActivity.login.id
         json["title"] = binding.etPostTitle.text.toString()
-        json["lost_loc"] = binding.etLostLocation.text.toString()
-        json["lost_date"] = binding.etLostDate.text.toString()
+        json["lost_loc"] = binding.tvLostLocation.text.toString()
+        json["lost_date"] = binding.tvLostDate.text.toString()
         json["name"] = binding.etLostName.text.toString()
         json["age"] = binding.etLostAge.text.toString()
         json["reg_num"] = binding.etLostRegNum.text.toString()
@@ -90,6 +112,9 @@ class WriteLostFragment : Fragment() {
             parameter,
             {
                 Timber.d("Post SUCCESS")
+                DetailLostFragment.newLost = NewLost(binding.etPostTitle.text.toString(), binding.tvLostLocation.text.toString(), binding.tvLostDate.text.toString(),
+                        binding.etLostName.text.toString(), binding.etLostAge.text.toString().toInt(), binding.etLostRegNum.text.toString(), binding.etLostPhoneNum.text.toString(),
+                        binding.etLostCharacter.text.toString(), petImageUrl)
                 findNavController().navigate(WriteLostFragmentDirections.actionWriteLostFragmentToDetailLostFragment())
                 // 근데 navigate할 때 값 넘겨줘야 된디
 
@@ -143,6 +168,15 @@ class WriteLostFragment : Fragment() {
             intent.type = "image/*"
             startActivityForResult(intent, 0)
         }
+    }
+
+    /*
+날짜 고르는 함수
+ */
+    private fun showDatePicker(view: TextView) {
+        DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { datePicker, year_, month_, date_ ->
+            view.text =  "${month_+1}월 ${date_}일" //month는 0부터 시작
+        }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE)).show()
     }
 
 }

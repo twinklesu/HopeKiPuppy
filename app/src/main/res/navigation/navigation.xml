@@ -139,7 +139,9 @@
         tools:layout="@layout/fragment_write_lost" >
         <action
             android:id="@+id/action_writeLostFragment_to_detailLostFragment"
-            app:destination="@id/detailLostFragment" />
+            app:destination="@id/detailLostFragment"
+            app:popUpTo="@id/writeLostFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_writeLostFragment_to_setLocationFragment"
             app:destination="@id/setLocationFragment" />

@@ -27,12 +27,12 @@ class DetailLostFragment : Fragment() {
     private lateinit var binding : FragmentDetailLostBinding
 
     companion object{
-        lateinit var lostSimple : LostSimple
+        var lostSimple : LostSimple? = null
+        lateinit var newLost: NewLost
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.d(lostSimple.toString())
     }
 
     override fun onCreateView(
@@ -41,37 +41,54 @@ class DetailLostFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail_lost, container, false)
 
-        val post_id = lostSimple.post_id
-        // 글 가져오기
-        val queue: RequestQueue = Volley.newRequestQueue(this.context)
-        val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/write-post-lost/${post_id}/"
+        if (lostSimple == null){
+            Glide.with(this.requireContext())
+                    .load(newLost.image)
+                    .into(binding.ivImage)
+            binding.tvPostTitle.text = newLost.title
+            binding.tvLostLocation.text = newLost.lost_loc
+            binding.tvLostDate.text = newLost.lost_date
+            binding.tvLostName.text = newLost.name
+            binding.tvLostAge.text = newLost.age.toString()
+            binding.tvLostRegNum.text = newLost.reg_num
+            binding.tvLostPhoneNum.text = newLost.phone_num
+            binding.tvLostCharacter.text = newLost.character
+        }
+        else {
+            val post_id = lostSimple!!.post_id
+            // 글 가져오기
+            val queue: RequestQueue = Volley.newRequestQueue(this.context)
+            val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/write-post-lost/${post_id}/"
 
-        val jsonObjectRequest = JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null,
-                { response ->
-                    try {
-                        val result = response
-                        Glide.with(this.requireContext())
-                                .load(result.getString("image"))
-                                .into(binding.ivImage)
-                        binding.tvPostTitle.text = result.getString("title")
-                        binding.tvLostLocation.text = result.getString("lost_loc")
-                        binding.tvLostDate.text = result.getString("lost_date")
-                        binding.tvLostName.text = result.getString("name")
-                        binding.tvLostAge.text = result.getInt("age").toString()
-                        binding.tvLostRegNum.text = result.getString("reg_num")
-                        binding.tvLostPhoneNum.text = result.getString("phone_num")
-                        binding.tvLostCharacter.text = result.getString("character")
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
+            val jsonObjectRequest = JsonObjectRequest(
+                    Request.Method.GET,
+                    url,
+                    null,
+                    { response ->
+                        try {
+                            val result = response
+                            Glide.with(this.requireContext())
+                                    .load(result.getString("image"))
+                                    .into(binding.ivImage)
+                            binding.tvPostTitle.text = result.getString("title")
+                            binding.tvLostLocation.text = result.getString("lost_loc")
+                            binding.tvLostDate.text = result.getString("lost_date")
+                            binding.tvLostName.text = result.getString("name")
+                            binding.tvLostAge.text = result.getInt("age").toString()
+                            binding.tvLostRegNum.text = result.getString("reg_num")
+                            binding.tvLostPhoneNum.text = result.getString("phone_num")
+                            binding.tvLostCharacter.text = result.getString("character")
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
                     }
-                }
-        ) {
-            it.printStackTrace()
-            Timber.d("request fail") }
-        queue.add(jsonObjectRequest)
+            ) {
+                it.printStackTrace()
+                Timber.d("request fail") }
+            queue.add(jsonObjectRequest)
+        }
+
+
 
 
 
@@ -80,4 +97,6 @@ class DetailLostFragment : Fragment() {
     }
 
 }
+
+data class NewLost(val title:String, val lost_loc :String, val lost_date : String, val name: String, val age: Int, val reg_num: String?, val phone_num: String, val character:String, val image:String)
 

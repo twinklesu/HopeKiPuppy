@@ -20,8 +20,14 @@ import com.google.android.gms.maps.model.MarkerOptions
 import timber.log.Timber
 import java.io.IOException
 import java.util.*
+import kotlin.properties.Delegates
 
+@Suppress("DEPRECATION")
 class MapsFragment : Fragment() {
+
+    var latitude : Double = 0.0
+    var longitude: Double = 0.0
+    var addr: String = ""
 
     private val callback = OnMapReadyCallback { googleMap ->
         val seoul = LatLng(37.574, 126.97458) //광화문 광장
@@ -33,13 +39,18 @@ class MapsFragment : Fragment() {
             val str = requireArguments().getString("addr")
             var addressList: List<Address>? = null
             try {
-                addressList = geocoder!!.getFromLocationName(str, 10)
+                addressList = geocoder.getFromLocationName(str, 10)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
             if(addressList!!.isNotEmpty()) {
-                var latitude = addressList[0].latitude
-                var longitude = addressList[0].longitude
+                latitude = addressList[0].latitude
+                longitude = addressList[0].longitude
+                addr = addressList[0].getAddressLine(0)
+
+                SetLocationFragment.lat = latitude
+                SetLocationFragment.long = longitude
+                SetLocationFragment.addr = addr
                 val point = LatLng(latitude, longitude) // 좌표(위도, 경도) 생성
                 val mOptions2 = MarkerOptions() // 마커 생성
                 mOptions2.title("search result")
@@ -53,13 +64,22 @@ class MapsFragment : Fragment() {
                     override fun onMarkerDragEnd(arg0: Marker) {
                         googleMap.animateCamera(CameraUpdateFactory.newLatLng(arg0.position))
                         val position = arg0.position
-                        latitude = position.latitude
-                        longitude = position.longitude
+                        SetLocationFragment.lat = position.latitude
+                        SetLocationFragment.long = position.longitude
+                        val geocoder = Geocoder(requireContext(), Locale.KOREAN)
+                        var addressList: List<Address>? = null
+                        try {
+                            do {
+                                addressList = geocoder.getFromLocation(position.latitude, position.longitude, 1)
+                            } while (addressList!!.isEmpty())
+                        } catch (e: IOException) {
+                            e.printStackTrace()
+                        }
+                        SetLocationFragment.addr = addressList!![0].getAddressLine(0) ?:"error"
                     }
                     override fun onMarkerDrag(arg0: Marker) {
                     }
                 })
-                Timber.d("lat $latitude , long $longitude")
             }
         }
     }

@@ -36,7 +36,7 @@
 
                 <EditText
                     android:id="@+id/et_addr"
-                    android:layout_width="290dp"
+                    android:layout_width="276dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp" />
 
@@ -56,6 +56,12 @@
 
 
             </FrameLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Move pin if you need"
+                android:gravity="center_horizontal"/>
 
             <TextView
                 android:id="@+id/text1"

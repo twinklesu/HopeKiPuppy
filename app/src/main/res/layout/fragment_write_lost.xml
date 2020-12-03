@@ -84,17 +84,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
+                        android:gravity="center"
                         android:text="Lost Location"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
-                    <EditText
-                        android:id="@+id/et_lost_location"
+                    <TextView
+                        android:id="@+id/tv_lost_location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:hint="Add the location"
-                        android:inputType="textPersonName"
+                        android:gravity="start|top"
+                        android:hint="Click to add location"
+                        android:inputType="textMultiLine"
                         android:textColor="@color/black" />
                 </LinearLayout>
 
@@ -112,11 +114,13 @@
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
-                    <EditText
-                        android:id="@+id/et_lost_date"
+                    <TextView
+                        android:id="@+id/tv_lost_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
+                        android:textColor="@color/black"
+                        android:hint="Click to input date"
                         android:inputType="date" />
 
                 </LinearLayout>
