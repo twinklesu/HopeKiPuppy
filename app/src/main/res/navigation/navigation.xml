@@ -140,6 +140,9 @@
         <action
             android:id="@+id/action_writeLostFragment_to_detailLostFragment"
             app:destination="@id/detailLostFragment" />
+        <action
+            android:id="@+id/action_writeLostFragment_to_setLocationFragment"
+            app:destination="@id/setLocationFragment" />
     </fragment>
     <fragment
         android:id="@+id/myPetFragment"
@@ -161,6 +164,16 @@
             android:id="@+id/action_registerPetFragment_to_myPetFragment"
             app:destination="@id/myPetFragment"
             app:popUpTo="@id/registerPetFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/setLocationFragment"
+        android:name="com.example.hopekipuppy.SetLocationFragment"
+        android:label="SetLocationFragment" >
+        <action
+            android:id="@+id/action_setLocationFragment_to_writeLostFragment"
+            app:destination="@id/writeLostFragment"
+            app:popUpTo="@id/setLocationFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>

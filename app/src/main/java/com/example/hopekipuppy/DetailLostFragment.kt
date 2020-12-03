@@ -70,7 +70,7 @@ class DetailLostFragment : Fragment() {
                 }
         ) {
             it.printStackTrace()
-            Timber.d("login request fail") }
+            Timber.d("request fail") }
         queue.add(jsonObjectRequest)
 
 

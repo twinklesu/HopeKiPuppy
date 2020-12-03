@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SetLocationFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set Location"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_addr"
+                    android:layout_width="290dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp" />
+
+                <Button
+                    android:id="@+id/bt_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
+                    android:text="search" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/fl_map"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp">
+
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Detail Location"
+                android:layout_marginTop="20dp"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:id="@+id/et_detail_loc"
+                android:hint="write detail location if you want"
+                android:textColor="@color/black"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/black"
+                android:text="Add location"
+                android:id="@+id/bt_add_loc"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>

@@ -54,6 +54,7 @@ class WriteLostFragment : Fragment() {
         )
 
         binding.btBringImage.setOnClickListener { selectGallery() }
+        binding.etLostLocation.setOnClickListener { findNavController().navigate(WriteLostFragmentDirections.actionWriteLostFragmentToSetLocationFragment())}
         binding.lostWritePost.setOnClickListener { registerMyLostWriting() }
         return binding.root
     }
