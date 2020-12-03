@@ -15,11 +15,12 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.example.hopekipuppy.databinding.FragmentDetailLostBinding
-import com.example.hopekipuppy.databinding.FragmentMainLostBinding
 import com.example.hopekipuppy.login.LoginFragmentDirections
 import com.example.hopekipuppy.title.LostSimple
 import org.json.JSONException
+import org.json.JSONObject
 import timber.log.Timber
+import java.util.HashMap
 
 
 class DetailLostFragment : Fragment() {
@@ -56,9 +57,10 @@ class DetailLostFragment : Fragment() {
         }
         else {
             val post_id = lostSimple!!.post_id
+            binding.linaerComment.visibility = View.VISIBLE
             // 글 가져오기
             val queue: RequestQueue = Volley.newRequestQueue(this.context)
-            val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/write-post-lost/${post_id}/"
+            var url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/write-post-lost/${post_id}/"
 
             val jsonObjectRequest = JsonObjectRequest(
                     Request.Method.GET,
@@ -86,7 +88,49 @@ class DetailLostFragment : Fragment() {
                 it.printStackTrace()
                 Timber.d("request fail") }
             queue.add(jsonObjectRequest)
+
+            /*
+            댓글 받아오기
+             */
+            url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/get-lost-comment/${post_id}"
+            val comment_list: ArrayList<Comment> = ArrayList()
+
+            val jsonArrayRequest = JsonArrayRequest(
+                    Request.Method.GET,
+                    url,
+                    null,
+                    { response ->
+                        try {
+                            val result_list = response
+                            for (i in 0..response.length() - 1) {
+                                val result = result_list.getJSONObject(i)
+                                val obj = Comment(result.getString("user_id"), result.getString("comment"))
+                                comment_list.add(obj)
+                            }
+                            // 여기 recycler
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
+                    }
+            ) {
+                it.printStackTrace()
+                Timber.d("request fail") }
+            queue.add(jsonObjectRequest)
         }
+
+        // 댓글 작성
+        binding.btComment.setOnClickListener {
+            if (binding.etComment.text.isNotBlank()){
+                writeComment(lostSimple!!.post_id, MainActivity.login.id, binding.etComment.text.toString())
+            }
+            else {
+                Toast.makeText(this.context, "No comment to write", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+
+
 
 
 
@@ -96,7 +140,35 @@ class DetailLostFragment : Fragment() {
         return binding.root
     }
 
+    private fun writeComment(post_id: Int, user_id:String, comment:String){
+
+        val queue = Volley.newRequestQueue(this.context)
+        val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/write-comment-lost/"
+
+        val json = HashMap<String?, String?>()
+
+        json["post_id"] = post_id.toString()
+        json["user_id"] = user_id
+        json["comment"] = comment
+
+        val parameter = JSONObject(json as Map<*, *>)
+        val jsonObjectRequest = JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                parameter,
+                {
+                    Timber.d("Post SUCCESS")
+                    findNavController().navigate(DetailLostFragmentDirections.actionDetailLostFragmentSelf())
+                }
+        ) { error ->
+            error.printStackTrace()
+            Timber.d("Post FAIL")
+        }
+        queue.add(jsonObjectRequest)
+
+    }
+
 }
 
 data class NewLost(val title:String, val lost_loc :String, val lost_date : String, val name: String, val age: Int, val reg_num: String?, val phone_num: String, val character:String, val image:String)
-
+data class Comment(val user_id: String, val comment: String)

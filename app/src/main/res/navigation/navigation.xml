@@ -127,7 +127,13 @@
         android:id="@+id/detailLostFragment"
         android:name="com.example.hopekipuppy.DetailLostFragment"
         android:label="fragment_detail_lost"
-        tools:layout="@layout/fragment_detail_lost" />
+        tools:layout="@layout/fragment_detail_lost" >
+        <action
+            android:id="@+id/action_detailLostFragment_self"
+            app:destination="@id/detailLostFragment"
+            app:popUpTo="@id/detailLostFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/detailFoundFragment"
         android:name="com.example.hopekipuppy.DetailFoundFragment"
