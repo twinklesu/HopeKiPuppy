@@ -8,14 +8,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
+import com.example.hopekipuppy.MainActivity
+import com.example.hopekipuppy.R
+import com.example.hopekipuppy.RecyclerAdapterLostMyPet
 import com.example.hopekipuppy.databinding.FragmentDetailLostBinding
-import com.example.hopekipuppy.login.LoginFragmentDirections
 import com.example.hopekipuppy.title.LostSimple
 import org.json.JSONException
 import org.json.JSONObject
@@ -37,10 +41,11 @@ class DetailLostFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail_lost, container, false)
+        binding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_detail_lost, container, false)
 
         if (lostSimple == null){
             Glide.with(this.requireContext())
@@ -104,10 +109,18 @@ class DetailLostFragment : Fragment() {
                             val result_list = response
                             for (i in 0..response.length() - 1) {
                                 val result = result_list.getJSONObject(i)
-                                val obj = Comment(result.getString("user_id"), result.getString("comment"))
+                                val obj =
+                                        Comment(
+                                                result.getString("user_id"), result.getString("comment")
+                                        )
                                 comment_list.add(obj)
                             }
-                            // 여기 recycler
+                            Timber.d(comment_list.toString())
+                            val RecyclerAdapterLostComments = RecyclerAdapterLostComments(binding.recyclerComments.context, comment_list)
+                            binding.recyclerComments.adapter = RecyclerAdapterLostComments
+                            val manager = LinearLayoutManager(binding.recyclerComments.context)
+                            binding.recyclerComments.layoutManager = manager
+
                         } catch (e: JSONException) {
                             e.printStackTrace()
                         }

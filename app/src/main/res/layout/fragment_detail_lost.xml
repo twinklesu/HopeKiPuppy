@@ -9,10 +9,10 @@
 
 
         <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="412dp"
             android:layout_height="685dp"
             app:layout_constraintBottom_toTopOf="@+id/linaer_comment"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -217,7 +217,27 @@
                         android:ems="10"
                         android:gravity="start|top"
                         android:textColor="@color/black" />
+
                 </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text = "comments"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:paddingTop="5dp"/>
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_comments"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="vertical">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+                </ScrollView>
             </LinearLayout>
         </ScrollView>
 
@@ -226,7 +246,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="gone"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
