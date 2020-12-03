@@ -1,4 +1,4 @@
-package com.example.hopekipuppy.setting
+package com.example.hopekipuppy.title.Lost
 
 import android.location.Address
 import android.location.Geocoder
@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.hopekipuppy.R
+import com.example.hopekipuppy.setting.SetLocationFragment
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
