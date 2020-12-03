@@ -25,6 +25,7 @@ import com.example.hopekipuppy.MyPetFragment
 import com.example.hopekipuppy.R
 import com.example.hopekipuppy.RegisterPetFragment
 import com.example.hopekipuppy.databinding.FragmentSettingBinding
+import com.example.hopekipuppy.title.LostSimple
 import com.example.hopekipuppy.title.MainLostAdapter
 import org.json.JSONException
 import timber.log.Timber
@@ -99,7 +100,10 @@ class SettingFragment : Fragment() {
                             val obj = LostSimple(result.getInt("post_id"),  result.getString("title"), result.getString("image"))
                             my_lost_list.add(obj)
                         }
-                        // 여기서 recycle. 제목만 보이게
+                        val RecyclerAdapterMyLost = RecyclerAdapterMyLost(binding.recyclerPostLost.context, my_lost_list)
+                        binding.recyclerPostLost.adapter = RecyclerAdapterMyLost
+                        val manager = LinearLayoutManager(binding.recyclerPostLost.context)
+                        binding.recyclerPostLost.layoutManager = manager
                         Timber.d(my_lost_list.toString())
                     } catch (e: JSONException) {
                         e.printStackTrace()
@@ -123,4 +127,3 @@ class SettingFragment : Fragment() {
 }
 
 data class Pet(val name:String, val age: Int, val variety: String, val image: String, var reg_num: String, var character: String)
-data class LostSimple(val post_id: Int, val title: String, val image: String)

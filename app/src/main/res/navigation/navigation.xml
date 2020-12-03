@@ -48,6 +48,12 @@
             android:defaultValue=""
             app:argType="string"
             />
+        <action
+            android:id="@+id/action_settingFragment_to_detailFoundFragment"
+            app:destination="@id/detailFoundFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_detailLostFragment"
+            app:destination="@id/detailLostFragment" />
     </fragment>
     <fragment
         android:id="@+id/setKeywordFragment"

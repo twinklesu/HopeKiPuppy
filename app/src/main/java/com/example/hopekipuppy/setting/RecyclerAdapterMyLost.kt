@@ -11,8 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hopekipuppy.DetailLostFragment
 import com.example.hopekipuppy.MyPetFragment
 import com.example.hopekipuppy.R
+import com.example.hopekipuppy.title.LostSimple
 
-class RecyclerAdapterMyLost(val context: Context, val lostSimple: ArrayList<LostSimple>) : RecyclerView.Adapter<RecyclerAdapterSettingPets.Holder>() {
+class RecyclerAdapterMyLost(val context: Context, val lostSimple: ArrayList<LostSimple>) : RecyclerView.Adapter<RecyclerAdapterMyLost.Holder>() {
     override fun getItemCount(): Int {
         return lostSimple.size
     }
@@ -37,7 +38,7 @@ class RecyclerAdapterMyLost(val context: Context, val lostSimple: ArrayList<Lost
             writing_title?.setOnClickListener {
                 DetailLostFragment.lostSimple = writing
                 val navController = Navigation.findNavController(itemView)
-                navController.navigate(SettingFragmentDirections.actionSettingFragmentToMyPetFragment())
+                navController.navigate(SettingFragmentDirections.actionSettingFragmentToDetailLostFragment())
             }
         }
     }
