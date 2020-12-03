@@ -25,11 +25,18 @@ import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.hopekipuppy.databinding.FragmentRegisterPetBinding
 import com.example.hopekipuppy.databinding.FragmentWriteLostBinding
+import com.example.hopekipuppy.setting.Pet
+import com.example.hopekipuppy.setting.RecyclerAdapterSettingPets
+import org.json.JSONException
 import org.json.JSONObject
 import timber.log.Timber
 import java.io.File
@@ -73,9 +80,39 @@ class WriteLostFragment : Fragment() {
         // 날짜 가져오기
         binding.tvLostDate.setOnClickListener{showDatePicker(binding.tvLostDate)}
 
-
-
         binding.lostWritePost.setOnClickListener { registerMyLostWriting() }
+
+        val queue: RequestQueue = Volley.newRequestQueue(this.context)
+        var url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/get-pet-list/${MainActivity.login.id}/"
+        val pet_list: ArrayList<Pet> = ArrayList()
+
+        var jsonArrayRequest = JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                { response ->
+                    try {
+                        val result_list = response
+                        for (i in 0..response.length() - 1) {
+                            val result = result_list.getJSONObject(i)
+                            val obj = Pet(result.getString("name"), result.getInt("age"), result.getString("variety"), result.getString("image"), result.getString("reg_num"), result.getString("character"))
+                            pet_list.add(obj)
+                        }
+                        val RecyclerAdapterLostMyPet = RecyclerAdapterLostMyPet(binding.recyclerMyPet.context, pet_list)
+                        RecyclerAdapterLostMyPet.binding = binding
+                        binding.recyclerMyPet.adapter = RecyclerAdapterLostMyPet
+                        val manager = LinearLayoutManager(binding.recyclerMyPet.context, RecyclerView.HORIZONTAL, false)
+                        binding.recyclerMyPet.layoutManager = manager
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                }
+        ) {
+            it.printStackTrace()
+            Timber.d("test request fail")
+        }
+        queue.add(jsonArrayRequest)
+
 
 
         return binding.root

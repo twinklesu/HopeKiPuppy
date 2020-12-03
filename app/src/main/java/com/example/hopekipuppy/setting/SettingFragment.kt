@@ -125,5 +125,4 @@ class SettingFragment : Fragment() {
 
 
 }
-
 data class Pet(val name:String, val age: Int, val variety: String, val image: String, var reg_num: String, var character: String)
