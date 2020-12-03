@@ -1,4 +1,4 @@
-package com.example.hopekipuppy.Writing.Lost
+package com.example.hopekipuppy
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,8 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.hopekipuppy.MainActivity
-import com.example.hopekipuppy.R
 import com.example.hopekipuppy.databinding.FragmentWriteLostBinding
 import com.example.hopekipuppy.setting.Pet
 

@@ -1,4 +1,4 @@
-package com.example.hopekipuppy.title.Found
+package com.example.hopekipuppy.title
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

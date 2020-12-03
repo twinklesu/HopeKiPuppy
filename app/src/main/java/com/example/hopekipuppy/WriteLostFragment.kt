@@ -1,19 +1,27 @@
-package com.example.hopekipuppy.Writing.Lost
+package com.example.hopekipuppy
 
 import android.Manifest
 import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
+import android.media.Image
+import android.media.ImageReader
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -24,15 +32,17 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.hopekipuppy.*
-import com.example.hopekipuppy.Detail.Lost.DetailLostFragment
-import com.example.hopekipuppy.Detail.Lost.NewLost
+import com.example.hopekipuppy.databinding.FragmentRegisterPetBinding
 import com.example.hopekipuppy.databinding.FragmentWriteLostBinding
 import com.example.hopekipuppy.setting.Pet
+import com.example.hopekipuppy.setting.RecyclerAdapterSettingPets
 import org.json.JSONException
 import org.json.JSONObject
 import timber.log.Timber
+import java.io.File
+import java.sql.Time
 import java.util.*
+import kotlin.properties.Delegates
 
 class WriteLostFragment : Fragment() {
 
@@ -65,10 +75,8 @@ class WriteLostFragment : Fragment() {
 
         binding.btBringImage.setOnClickListener { selectGallery() }
         // 장소가져오기
-        binding.tvLostLocation.setOnClickListener { findNavController().navigate(
-            WriteLostFragmentDirections.actionWriteLostFragmentToSetLocationFragment())}
-        binding.tvLostLocation.text =
-            addr
+        binding.tvLostLocation.setOnClickListener { findNavController().navigate(WriteLostFragmentDirections.actionWriteLostFragmentToSetLocationFragment())}
+        binding.tvLostLocation.text = addr
         // 날짜 가져오기
         binding.tvLostDate.setOnClickListener{showDatePicker(binding.tvLostDate)}
 
@@ -90,11 +98,7 @@ class WriteLostFragment : Fragment() {
                             val obj = Pet(result.getString("name"), result.getInt("age"), result.getString("variety"), result.getString("image"), result.getString("reg_num"), result.getString("character"))
                             pet_list.add(obj)
                         }
-                        val RecyclerAdapterLostMyPet =
-                            RecyclerAdapterLostMyPet(
-                                binding.recyclerMyPet.context,
-                                pet_list
-                            )
+                        val RecyclerAdapterLostMyPet = RecyclerAdapterLostMyPet(binding.recyclerMyPet.context, pet_list)
                         RecyclerAdapterLostMyPet.binding = binding
                         binding.recyclerMyPet.adapter = RecyclerAdapterLostMyPet
                         val manager = LinearLayoutManager(binding.recyclerMyPet.context, RecyclerView.HORIZONTAL, false)
@@ -145,18 +149,9 @@ class WriteLostFragment : Fragment() {
             parameter,
             {
                 Timber.d("Post SUCCESS")
-                DetailLostFragment.newLost =
-                    NewLost(
-                        binding.etPostTitle.text.toString(),
-                        binding.tvLostLocation.text.toString(),
-                        binding.tvLostDate.text.toString(),
-                        binding.etLostName.text.toString(),
-                        binding.etLostAge.text.toString().toInt(),
-                        binding.etLostRegNum.text.toString(),
-                        binding.etLostPhoneNum.text.toString(),
-                        binding.etLostCharacter.text.toString(),
-                        petImageUrl
-                    )
+                DetailLostFragment.newLost = NewLost(binding.etPostTitle.text.toString(), binding.tvLostLocation.text.toString(), binding.tvLostDate.text.toString(),
+                        binding.etLostName.text.toString(), binding.etLostAge.text.toString().toInt(), binding.etLostRegNum.text.toString(), binding.etLostPhoneNum.text.toString(),
+                        binding.etLostCharacter.text.toString(), petImageUrl)
                 findNavController().navigate(WriteLostFragmentDirections.actionWriteLostFragmentToDetailLostFragment())
                 // 근데 navigate할 때 값 넘겨줘야 된디
 

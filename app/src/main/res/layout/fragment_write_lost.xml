@@ -5,7 +5,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Writing.Lost.WriteLostFragment">
+        tools:context=".WriteLostFragment">
 
         <!-- TODO: Update blank fragment layout -->
 

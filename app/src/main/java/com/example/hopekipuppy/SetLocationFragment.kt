@@ -1,4 +1,4 @@
-package com.example.hopekipuppy.setting
+package com.example.hopekipuppy
 
 import android.content.Context
 import android.os.Bundle
@@ -9,8 +9,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.hopekipuppy.R
-import com.example.hopekipuppy.Writing.Lost.WriteLostFragment
+import androidx.fragment.app.FragmentManager
 import com.example.hopekipuppy.databinding.FragmentSetLocationBinding
 import kotlin.properties.Delegates
 
@@ -31,9 +30,7 @@ class SetLocationFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         val ft = requireFragmentManager().beginTransaction()
-        ft.replace(
-            R.id.fl_map, MapsFragment()
-                .apply {
+        ft.replace(R.id.fl_map, MapsFragment().apply {
             arguments = Bundle().apply {
                 putString("addr", null)
             }
@@ -47,7 +44,7 @@ class SetLocationFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
-            R.layout.fragment_set_location,
+                R.layout.fragment_set_location,
                 container,
                 false
         )
@@ -57,9 +54,7 @@ class SetLocationFragment : Fragment() {
             imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
             if(binding.etAddr.text.isNotEmpty()) {
                 val ft = requireFragmentManager().beginTransaction()
-                ft.replace(
-                    R.id.fl_map, MapsFragment()
-                        .apply {
+                ft.replace(R.id.fl_map, MapsFragment().apply {
                     arguments = Bundle().apply {
                         putString("addr", binding.etAddr.text.toString())
                     }
@@ -71,10 +66,8 @@ class SetLocationFragment : Fragment() {
         binding.btAddLoc.setOnClickListener{
             addr = addr + " " +binding.etDetailLoc.text
             WriteLostFragment.addr = addr.toString()
-            WriteLostFragment.lat =
-                lat
-            WriteLostFragment.long =
-                long
+            WriteLostFragment.lat = lat
+            WriteLostFragment.long = long
             val ft = requireFragmentManager()
             ft.beginTransaction().detach(this).commit()
             ft.popBackStack()

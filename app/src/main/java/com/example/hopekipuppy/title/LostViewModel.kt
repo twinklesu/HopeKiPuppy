@@ -1,4 +1,4 @@
-package com.example.hopekipuppy.title.Lost
+package com.example.hopekipuppy.title
 
 import android.app.Application
 import androidx.lifecycle.Transformations

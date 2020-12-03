@@ -1,4 +1,4 @@
-package com.example.hopekipuppy.title.Lost
+package com.example.hopekipuppy.title
 
 import android.Manifest
 import android.content.Context
@@ -22,7 +22,6 @@ import com.android.volley.toolbox.Volley
 import com.example.hopekipuppy.MainActivity
 import com.example.hopekipuppy.R
 import com.example.hopekipuppy.databinding.FragmentMainLostBinding
-import com.example.hopekipuppy.title.MainLostFragmentDirections
 import com.google.android.gms.location.*
 import org.json.JSONException
 import timber.log.Timber
@@ -82,18 +81,10 @@ class MainLostFragment : Fragment() {
                     val result_list = response
                     for (i in 0..response.length() - 1) {
                         val result = result_list.getJSONObject(i)
-                        val obj = LostSimple(
-                            result.getInt("post_id"),
-                            result.getString("title"),
-                            result.getString("image")
-                        )
+                        val obj = LostSimple(result.getInt("post_id"), result.getString("title"), result.getString("image"))
                         lost_list.add(obj)
                     }
-                    val LostAdapter =
-                        MainLostAdapter(
-                            binding.LostRecyclerView.context,
-                            lost_list
-                        )
+                    val LostAdapter = MainLostAdapter(binding.LostRecyclerView.context, lost_list)
                     binding.LostRecyclerView.adapter = LostAdapter
                     val Gm = GridLayoutManager(binding.LostRecyclerView.context,2)
                     binding.LostRecyclerView.layoutManager = Gm

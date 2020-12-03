@@ -1,4 +1,4 @@
-package com.example.hopekipuppy.title.Found
+package com.example.hopekipuppy.title
 
 import androidx.lifecycle.ViewModel
 
