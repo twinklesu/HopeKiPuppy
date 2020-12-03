@@ -9,10 +9,19 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
+import com.example.hopekipuppy.Found
 import com.example.hopekipuppy.MainActivity
 import com.example.hopekipuppy.R
 import com.example.hopekipuppy.databinding.FragmentMainFoundBinding
 import com.example.hopekipuppy.title.MainFoundFragmentDirections
+import org.json.JSONException
+import timber.log.Timber
+import java.util.ArrayList
 
 class MainFoundFragment : Fragment() {
 
@@ -47,6 +56,33 @@ class MainFoundFragment : Fragment() {
         binding.DongText.text = MainActivity.login.user_town
 
         // found 목록 가져오기
+        val queue: RequestQueue = Volley.newRequestQueue(this.context)
+        val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/get-found-list/"
+        val found_list: ArrayList<Found> = ArrayList()
+
+        val jsonArrayRequest = JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                { response ->
+                    try {
+                        val result_list = response
+                        for (i in 0..response.length() - 1) {
+                            val result = result_list.getJSONObject(i)
+                            val obj = Found(result.getInt("post_id"), result.getString("title"), result.getString("found_loc"),
+                                    result.getString("found_date"), result.getString("detail"), result.getString("image"))
+                            found_list.add(obj)
+                        }
+                        // recycler view 여기에
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                }
+        ) {
+            it.printStackTrace()
+            Timber.d("test request fail")
+        }
+        queue.add(jsonArrayRequest)
 
 
         return binding.root

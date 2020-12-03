@@ -20,10 +20,7 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
-import com.example.hopekipuppy.MainActivity
-import com.example.hopekipuppy.MyPetFragment
-import com.example.hopekipuppy.R
-import com.example.hopekipuppy.RegisterPetFragment
+import com.example.hopekipuppy.*
 import com.example.hopekipuppy.databinding.FragmentSettingBinding
 import com.example.hopekipuppy.title.LostSimple
 import com.example.hopekipuppy.title.MainLostAdapter
@@ -116,6 +113,32 @@ class SettingFragment : Fragment() {
         queue.add(jsonArrayRequest)
 
         // found list
+        url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/my-found-list/${MainActivity.login.id}/"
+        val my_found_list: ArrayList<Found> = ArrayList()
+
+        jsonArrayRequest = JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                { response ->
+                    try {
+                        val result_list = response
+                        for (i in 0..response.length() - 1) {
+                            val result = result_list.getJSONObject(i)
+                            val obj = Found(result.getInt("post_id"), result.getString("title"), result.getString("found_loc"),
+                                    result.getString("found_date"), result.getString("detail"), result.getString("image"))
+                            my_found_list.add(obj)
+                        }
+                        // recycler 여기에
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                }
+        ) {
+            it.printStackTrace()
+            Timber.d("test request fail")
+        }
+        queue.add(jsonArrayRequest)
 
 
 

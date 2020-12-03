@@ -154,4 +154,4 @@ class WriteFoundFragment : Fragment() {
 
 }
 
-data class Found(var post_id: String?, val title:String, val found_loc :String, val found_date : String,val detail:String, val image:String)
+data class Found(var post_id: Int?, val title:String, val found_loc :String, val found_date : String,val detail:String, val image:String)
