@@ -7,18 +7,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <ScrollView
             android:id="@+id/scrollView2"
-            android:layout_width="412dp"
-            android:layout_height="685dp"
+            android:layout_width="match_parent"
+            android:layout_height="680sp"
+            android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toTopOf="@+id/linaer_comment"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
+                android:id="@+id/secondlinear"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -219,42 +221,43 @@
                         android:textColor="@color/black" />
 
                 </LinearLayout>
+
                 <TextView
+                    android:id="@+id/comments_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text = "comments"
+                    android:paddingTop="5dp"
+                    android:text="comments"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:paddingTop="5dp"/>
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:textSize="18sp" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recycler_comments"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:scrollbars="vertical">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars = "vertical">
 
-                        </androidx.recyclerview.widget.RecyclerView>
-                </ScrollView>
+                    </androidx.recyclerview.widget.RecyclerView>
+
             </LinearLayout>
         </ScrollView>
 
         <LinearLayout
             android:id="@+id/linaer_comment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50sp"
             android:orientation="horizontal"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <EditText
                 android:id="@+id/et_comment"
                 android:layout_width="266dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
                 android:ems="10"
                 android:hint="Write comment"
                 android:inputType="textPersonName" />
