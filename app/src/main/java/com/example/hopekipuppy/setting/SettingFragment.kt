@@ -85,7 +85,7 @@ class SettingFragment : Fragment() {
 
         // lost list
         url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/my-lost-list/${MainActivity.login.id}/"
-        val my_lost_list: ArrayList<Lost> = ArrayList()
+        val my_lost_list: ArrayList<LostSimple> = ArrayList()
 
         jsonArrayRequest = JsonArrayRequest(
                 Request.Method.GET,
@@ -96,8 +96,7 @@ class SettingFragment : Fragment() {
                         val result_list = response
                         for (i in 0..response.length() - 1) {
                             val result = result_list.getJSONObject(i)
-                            val obj = Lost(result.getInt("post_id"), result.getString("user_id"), result.getString("title"), result.getString("lost_loc"), result.getString("lost_date"), result.getString("name"),
-                                            result.getInt("age"), result.getString("reg_num"), result.getString("phone_num"), result.getString("character"), result.getString("image"))
+                            val obj = LostSimple(result.getInt("post_id"),  result.getString("title"), result.getString("image"))
                             my_lost_list.add(obj)
                         }
                         // 여기서 recycle. 제목만 보이게
@@ -124,4 +123,4 @@ class SettingFragment : Fragment() {
 }
 
 data class Pet(val name:String, val age: Int, val variety: String, val image: String, var reg_num: String, var character: String)
-data class Lost(val post_id: Int, val user_id: String, val title: String, val lost_loc: String, val loc_date: String, val name: String, val age: Int, var reg_num: String?, val phone_num: String, val character: String, val image: String)
+data class LostSimple(val post_id: Int, val title: String, val image: String)
