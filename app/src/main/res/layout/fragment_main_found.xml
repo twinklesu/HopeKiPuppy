@@ -62,7 +62,7 @@
                     android:id="@+id/DongText"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="210dp"
+                    android:layout_marginEnd="200dp"
                     android:gravity="center"
                     android:text="Dong"
                     android:textColor="@color/black"
@@ -94,10 +94,11 @@
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="600dp"
                     android:gravity="bottom"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/Found_recyclerView">
 
                     <Button
                         android:id="@+id/Lost_Go_Button"
