@@ -146,7 +146,7 @@
             android:id="@+id/action_writeLostFragment_to_setLocationFragment"
             app:destination="@id/setLocationFragment"
             app:popUpTo="@id/writeLostFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/myPetFragment"
