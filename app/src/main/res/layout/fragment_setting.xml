@@ -187,6 +187,7 @@
                         android:textColor="@color/black"
                         android:textSize="30sp" />
 
+
                     <TextView
                         android:id="@+id/textview9"
                         android:layout_width="match_parent"
@@ -197,7 +198,13 @@
                         android:textColor="@color/black"
                         android:textSize="25sp" />
 
-                    <!--lost list-->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/recycler_post_lost">
+
+
+                    </androidx.recyclerview.widget.RecyclerView>
 
                     <TextView
                         android:id="@+id/textview10"
@@ -209,13 +216,13 @@
                         android:textColor="@color/black"
                         android:textSize="25sp" />
 
-                    <Button
-                        android:id="@+id/bt_temp"
+                    <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="임시 버튼" />
+                        android:id="@+id/recycler_post_found">
 
-                    <!--found list-->
+
+                    </androidx.recyclerview.widget.RecyclerView>
 
 
                 </LinearLayout>

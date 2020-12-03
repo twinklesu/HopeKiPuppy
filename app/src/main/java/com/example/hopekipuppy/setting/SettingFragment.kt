@@ -48,21 +48,16 @@ class SettingFragment : Fragment() {
         binding.tvNickname.text = MainActivity.login.user_nicknm
         binding.tvPhoneNum.text = MainActivity.login.user_tel
         binding.tvMyTown.text = MainActivity.login.user_town
-        // 데이터 넘기기
-
+        // register my pet
         binding.btRegPet.setOnClickListener { findNavController().navigate(SettingFragmentDirections.actionSettingFragmentToRegisterPetFragment()) }
-        binding.btTemp.setOnClickListener {
-            MyPetFragment.petName = "Rooney"
-            findNavController().navigate(SettingFragmentDirections.actionSettingFragmentToMyPetFragment())
-        }
 
 
         // pet 목록 가져오기
         val queue: RequestQueue = Volley.newRequestQueue(this.context)
-        val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/get-pet-list/${MainActivity.login.id}/"
+        var url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/get-pet-list/${MainActivity.login.id}/"
         val pet_list: ArrayList<Pet> = ArrayList()
 
-        val jsonArrayRequest = JsonArrayRequest(
+        var jsonArrayRequest = JsonArrayRequest(
             Request.Method.GET,
             url,
             null,
@@ -88,6 +83,37 @@ class SettingFragment : Fragment() {
         }
         queue.add(jsonArrayRequest)
 
+        // lost list
+        url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/my-lost-list/${MainActivity.login.id}/"
+        val my_lost_list: ArrayList<Lost> = ArrayList()
+
+        jsonArrayRequest = JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                { response ->
+                    try {
+                        val result_list = response
+                        for (i in 0..response.length() - 1) {
+                            val result = result_list.getJSONObject(i)
+                            val obj = Lost(result.getInt("post_id"), result.getString("user_id"), result.getString("title"), result.getString("lost_loc"), result.getString("lost_date"), result.getString("name"),
+                                            result.getInt("age"), result.getString("reg_num"), result.getString("phone_num"), result.getString("character"), result.getString("image"))
+                            my_lost_list.add(obj)
+                        }
+                        // 여기서 recycle. 제목만 보이게
+                        Timber.d(my_lost_list.toString())
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                }
+        ) {
+            it.printStackTrace()
+            Timber.d("test request fail")
+        }
+        queue.add(jsonArrayRequest)
+
+        // found list
+
 
 
         return binding.root
@@ -98,3 +124,4 @@ class SettingFragment : Fragment() {
 }
 
 data class Pet(val name:String, val age: Int, val variety: String, val image: String, var reg_num: String, var character: String)
+data class Lost(val post_id: Int, val user_id: String, val title: String, val lost_loc: String, val loc_date: String, val name: String, val age: Int, var reg_num: String?, val phone_num: String, val character: String, val image: String)
