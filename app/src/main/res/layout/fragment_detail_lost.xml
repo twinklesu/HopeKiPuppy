@@ -228,15 +228,23 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/comments_text"
+                <LinearLayout
+
+                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingTop="5dp"
-                    android:text="comments"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/comments_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="comments"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        />
+
+                </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"

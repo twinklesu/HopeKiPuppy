@@ -26,11 +26,15 @@
                     android:layout_gravity="center_horizontal"
                     tools:srcCompat="@tools:sample/avatars" />
 
+                android:layout_marginBottom="10dp"
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp"
+                    >
 
                     <TextView
                         android:id="@+id/textView8"
@@ -44,7 +48,7 @@
                     <TextView
                         android:id="@+id/tv_pet_name"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -52,8 +56,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp">
 
                     <TextView
                         android:id="@+id/textView1"
@@ -67,15 +71,15 @@
                     <TextView
                         android:id="@+id/tv_pet_age"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp">
 
                     <TextView
                         android:id="@+id/textView2"
@@ -89,14 +93,14 @@
                     <TextView
                         android:id="@+id/tv_pet_variety"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -111,7 +115,7 @@
                     <TextView
                         android:id="@+id/tv_pet_reg_num"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="clip_vertical"
                         android:textColor="@color/black" />
                 </LinearLayout>
@@ -119,7 +123,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -135,7 +139,7 @@
                     <TextView
                         android:id="@+id/tv_pet_character"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:textColor="@color/black" />
                 </LinearLayout>
 

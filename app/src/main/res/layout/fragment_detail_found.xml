@@ -102,7 +102,7 @@
                         <TextView
                             android:id="@+id/tv_found_date"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:ems="10"
                             android:inputType="date" />
@@ -128,20 +128,29 @@
                         <TextView
                             android:id="@+id/tv_found_detail"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:ems="10"
                             android:gravity="start|top"
                             android:inputType="textMultiLine"
                             android:textColor="@color/black" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/comments_text"
+                    <LinearLayout
+                        android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="comments"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:layout_gravity="center">
+
+                        <TextView
+                            android:id="@+id/comments_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="comments"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            />
+
+                    </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"

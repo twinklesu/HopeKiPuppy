@@ -129,7 +129,7 @@
                         <TextView
                             android:id="@+id/textView9"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginEnd="10dp"
                             android:gravity="center"
                             android:text="Found\nLocation"
@@ -138,7 +138,7 @@
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="10dp"
                             android:id="@+id/et_detail_loc"
                             android:textColor="@color/black"/>
@@ -168,7 +168,7 @@
                     <TextView
                         android:id="@+id/tv_found_date"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:ems="10"
                         android:textColor="@color/black"
                         android:hint="Click to input date" />
