@@ -9,7 +9,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.hopekipuppy.databinding.FragmentSetLocationBinding
 import kotlin.properties.Delegates
 
@@ -30,7 +29,7 @@ class SetLocationFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         val ft = requireFragmentManager().beginTransaction()
-        ft.replace(R.id.fl_map, MapsFragment().apply {
+        ft.replace(R.id.fl_map, FoundMapsFragment().apply {
             arguments = Bundle().apply {
                 putString("addr", null)
             }
@@ -54,7 +53,7 @@ class SetLocationFragment : Fragment() {
             imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
             if(binding.etAddr.text.isNotEmpty()) {
                 val ft = requireFragmentManager().beginTransaction()
-                ft.replace(R.id.fl_map, MapsFragment().apply {
+                ft.replace(R.id.fl_map, FoundMapsFragment().apply {
                     arguments = Bundle().apply {
                         putString("addr", binding.etAddr.text.toString())
                     }

@@ -5,7 +5,6 @@ import android.location.Geocoder
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,17 +16,16 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import timber.log.Timber
 import java.io.IOException
 import java.util.*
-import kotlin.properties.Delegates
 
 @Suppress("DEPRECATION")
-class MapsFragment : Fragment() {
+class FoundMapsFragment : Fragment() {
 
     var latitude : Double = 0.0
     var longitude: Double = 0.0
     var addr: String = ""
+
 
     private val callback = OnMapReadyCallback { googleMap ->
         val seoul = LatLng(37.574, 126.97458) //광화문 광장
@@ -48,9 +46,10 @@ class MapsFragment : Fragment() {
                 longitude = addressList[0].longitude
                 addr = addressList[0].getAddressLine(0)
 
-                SetLocationFragment.lat = latitude
-                SetLocationFragment.long = longitude
-                SetLocationFragment.addr = addr
+                WriteFoundFragment.lat = latitude
+                WriteFoundFragment.long = longitude
+                WriteFoundFragment.addr = addr
+
                 val point = LatLng(latitude, longitude) // 좌표(위도, 경도) 생성
                 val mOptions2 = MarkerOptions() // 마커 생성
                 mOptions2.title("search result")
@@ -64,8 +63,8 @@ class MapsFragment : Fragment() {
                     override fun onMarkerDragEnd(arg0: Marker) {
                         googleMap.animateCamera(CameraUpdateFactory.newLatLng(arg0.position))
                         val position = arg0.position
-                        SetLocationFragment.lat = position.latitude
-                        SetLocationFragment.long = position.longitude
+                        WriteFoundFragment.lat = position.latitude
+                        WriteFoundFragment.long = position.longitude
                         val geocoder = Geocoder(requireContext(), Locale.KOREAN)
                         var addressList: List<Address>? = null
                         try {
@@ -75,7 +74,7 @@ class MapsFragment : Fragment() {
                         } catch (e: IOException) {
                             e.printStackTrace()
                         }
-                        SetLocationFragment.addr = addressList!![0].getAddressLine(0) ?:"error"
+                        WriteFoundFragment.addr = addressList!![0].getAddressLine(0) ?:"error"
                     }
                     override fun onMarkerDrag(arg0: Marker) {
                     }
@@ -89,7 +88,7 @@ class MapsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_maps, container, false)
+        return inflater.inflate(R.layout.fragment_found_maps, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

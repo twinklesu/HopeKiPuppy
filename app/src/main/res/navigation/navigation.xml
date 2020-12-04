@@ -199,5 +199,11 @@
     <fragment
         android:id="@+id/setLocationFragment"
         android:name="com.example.hopekipuppy.SetLocationFragment"
-        android:label="SetLocationFragment" />
+        android:label="SetLocationFragment" >
+        <action
+            android:id="@+id/action_setLocationFragment_to_writeFoundFragment"
+            app:destination="@id/writeFoundFragment"
+            app:popUpTo="@id/setLocationFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

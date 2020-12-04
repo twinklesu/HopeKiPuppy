@@ -46,9 +46,11 @@ class RecyclerAdapterLostMyPet(val context: Context, val petList: ArrayList<Pet>
                 binding.etLostPhoneNum.setText(MainActivity.login.user_tel)
                 binding.etLostPhoneNum.editableText
                 binding.etLostRegNum.setText(pet.reg_num)
+                WriteLostFragment.petImageUrl = pet.image
                 Glide.with(context)
                         .load(pet.image)
                         .into(binding.ivTest)
+                binding.ivTest.visibility = View.VISIBLE
             }
         }
     }

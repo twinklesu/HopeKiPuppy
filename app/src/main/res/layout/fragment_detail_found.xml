@@ -31,13 +31,14 @@
                         android:id="@+id/tv_post_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/black"
+                        android:background="#383838"
                         android:ems="10"
-                        android:paddingStart="5dp"
+                        android:paddingStart="15dp"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
                         android:textColor="@color/white"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
+                        android:layout_marginBottom="10dp"
                         tools:text="이거 제목" />
 
                 </LinearLayout>
@@ -50,115 +51,98 @@
                     android:layout_marginBottom="10dp"
                     tools:srcCompat="@tools:sample/avatars" />
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:text="Found Location"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
 
-                    <TextView
-                        android:id="@+id/tv_found_location"
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:ems="10"
-                        android:textColor="@color/black" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:text="Found Date"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/tv_found_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:ems="10"
-                        android:inputType="date" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView15"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="10dp"
-                        android:text="Details"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/tv_found_detail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:gravity="start|top"
-                        android:textColor="@color/black"
-                        android:inputType="textMultiLine"/>
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/comments_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingTop="5dp"
-                    android:text="comments"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-                <LinearLayout
-                    android:id="@+id/linaer_comment"
-                    android:layout_width="match_parent"
-                    android:layout_height="50sp"
-                    android:orientation="horizontal"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                    <EditText
-                        android:id="@+id/et_comment"
-                        android:layout_width="266dp"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="5dp"
-                        android:ems="10"
-                        android:hint="Write comment"
-                        android:inputType="textPersonName"/>
-                    <Button
-                        android:id="@+id/bt_comment"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:text="Found Location"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tv_found_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:ems="10"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:text="Found Date"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tv_found_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:ems="10"
+                            android:inputType="date" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="10dp"
+                            android:text="Details"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tv_found_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:gravity="start|top"
+                            android:textColor="@color/black"
+                            android:inputType="textMultiLine"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/comments_text"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="comment" />
-                </LinearLayout>
+                        android:layout_height="match_parent"
+                        android:paddingTop="5dp"
+                        android:text="comments"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_comments"
@@ -166,6 +150,38 @@
                         android:layout_height="wrap_content"
                         android:scrollbars = "vertical">
                     </androidx.recyclerview.widget.RecyclerView>
+
+                    <LinearLayout
+                        android:id="@+id/linaer_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="50sp"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <EditText
+                            android:id="@+id/et_comment"
+                            android:layout_width="266dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:ems="10"
+                            android:hint="Write comment"
+                            android:inputType="textPersonName"/>
+                        <Button
+                            android:id="@+id/bt_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="comment" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

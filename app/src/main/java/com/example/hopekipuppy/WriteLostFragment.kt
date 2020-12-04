@@ -16,6 +16,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -43,21 +44,29 @@ import java.sql.Time
 import java.util.*
 import kotlin.properties.Delegates
 
+@Suppress("DEPRECATION")
 class WriteLostFragment : Fragment() {
 
     private lateinit var binding : FragmentWriteLostBinding
-    lateinit var petImageUrl : String
     private lateinit var cal : Calendar
 
     companion object{
         var lat : Double = 0.0
         var long: Double = 0.0
         var addr: String = ""
+        var petImageUrl : String = ""
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val ft = requireFragmentManager().beginTransaction()
+        ft.replace(R.id.fl_map, FoundMapsFragment().apply {
+            arguments = Bundle().apply {
+                putString("addr", null)
+            }
+        }).commit()
     }
 
     override fun onCreateView(
@@ -74,8 +83,23 @@ class WriteLostFragment : Fragment() {
 
         binding.btBringImage.setOnClickListener { selectGallery() }
         // 장소가져오기
-        binding.tvLostLocation.setOnClickListener { findNavController().navigate(WriteLostFragmentDirections.actionWriteLostFragmentToSetLocationFragment())}
-        binding.tvLostLocation.text = addr
+        binding.btSearch.setOnClickListener {
+            val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+            if(binding.etAddr.text.isNotEmpty()) {
+                val ft = requireFragmentManager().beginTransaction()
+                ft.replace(R.id.fl_map, FoundMapsFragment().apply {
+                    arguments = Bundle().apply {
+                        putString("addr", binding.etAddr.text.toString())
+                    }
+                }).commit()
+            }
+            else Toast.makeText(this.context, "Input location", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btSetLoc.setOnClickListener {
+            binding.etDetailLoc.setText(WriteFoundFragment.addr)
+        }
         // 날짜 가져오기
         binding.tvLostDate.setOnClickListener{showDatePicker(binding.tvLostDate)}
 
@@ -119,7 +143,7 @@ class WriteLostFragment : Fragment() {
 
     private fun registerMyLostWriting(){
         // 이름이랑 장소 없으면 안됨
-        if (binding.etPostTitle.text.isNullOrEmpty() || binding.tvLostLocation.text.isNullOrEmpty()) {
+        if (binding.etPostTitle.text.isNullOrEmpty() || binding.etDetailLoc.text.isNullOrEmpty()) {
             Toast.makeText(this.context, "Title and Location are mandatory", Toast.LENGTH_SHORT).show()
             return
         }
@@ -131,7 +155,7 @@ class WriteLostFragment : Fragment() {
 
         json["user_id"] = MainActivity.login.id
         json["title"] = binding.etPostTitle.text.toString()
-        json["lost_loc"] = binding.tvLostLocation.text.toString()
+        json["lost_loc"] = binding.etDetailLoc.text.toString()
         json["lost_date"] = binding.tvLostDate.text.toString()
         json["name"] = binding.etLostName.text.toString()
         json["age"] = binding.etLostAge.text.toString()
@@ -148,7 +172,7 @@ class WriteLostFragment : Fragment() {
             parameter,
             {
                 Timber.d("Post SUCCESS")
-                DetailLostFragment.newLost = NewLost(binding.etPostTitle.text.toString(), binding.tvLostLocation.text.toString(), binding.tvLostDate.text.toString(),
+                DetailLostFragment.newLost = NewLost(binding.etPostTitle.text.toString(), binding.etDetailLoc.text.toString(), binding.tvLostDate.text.toString(),
                         binding.etLostName.text.toString(), binding.etLostAge.text.toString().toInt(), binding.etLostRegNum.text.toString(), binding.etLostPhoneNum.text.toString(),
                         binding.etLostCharacter.text.toString(), petImageUrl)
                 findNavController().navigate(WriteLostFragmentDirections.actionWriteLostFragmentToDetailLostFragment())
@@ -169,6 +193,7 @@ class WriteLostFragment : Fragment() {
             val selectedImageUri = data!!.data
             Timber.d(selectedImageUri.toString())
             binding.ivTest.setImageURI(selectedImageUri)
+            binding.ivTest.visibility = View.VISIBLE
             val currentTime = Calendar.getInstance().timeInMillis
             val storage = MainActivity.storage
             val storageRef = storage.reference.child("images").child("${MainActivity.login.id}/${currentTime}.png")
