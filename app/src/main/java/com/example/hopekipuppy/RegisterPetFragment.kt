@@ -30,7 +30,7 @@ import java.util.*
 class RegisterPetFragment : Fragment() {
 
     private lateinit var binding : FragmentRegisterPetBinding
-    private lateinit var petImageUrl : String
+    private var petImageUrl : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
