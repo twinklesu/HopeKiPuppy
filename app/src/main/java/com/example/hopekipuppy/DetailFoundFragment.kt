@@ -31,7 +31,6 @@ class DetailFoundFragment : Fragment() {
         var found: Found? = null
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
