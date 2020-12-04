@@ -55,11 +55,14 @@ class WriteLostFragment : Fragment() {
         var long: Double = 0.0
         var addr: String = ""
         var petImageUrl : String = ""
+        var isNewPost = false
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        isNewPost = true
 
         val ft = requireFragmentManager().beginTransaction()
         ft.replace(R.id.fl_map, FoundMapsFragment().apply {

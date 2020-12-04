@@ -47,7 +47,9 @@ class DetailLostFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_detail_lost, container, false)
 
-        if (lostSimple == null){
+        if (WriteLostFragment.isNewPost){
+            WriteLostFragment.isNewPost = false
+            Timber.d(newLost.image)
             Glide.with(this.requireContext())
                     .load(newLost.image)
                     .into(binding.ivImage)

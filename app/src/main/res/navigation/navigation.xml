@@ -105,7 +105,7 @@
         <action
             android:id="@+id/action_mainFoundFragment_to_mainLostFragment"
             app:destination="@id/mainLostFragment"
-            app:popUpTo="@id/mainLostFragment"
+            app:popUpTo="@id/mainFoundFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFoundFragment_to_detailFoundFragment"
@@ -146,7 +146,9 @@
         tools:layout="@layout/fragment_detail_found" >
         <action
             android:id="@+id/action_detailFoundFragment_self"
-            app:destination="@id/detailFoundFragment" />
+            app:destination="@id/detailFoundFragment"
+            app:popUpTo="@id/detailFoundFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/writeFoundFragment"

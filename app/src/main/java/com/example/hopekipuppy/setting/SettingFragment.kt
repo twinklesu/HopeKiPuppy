@@ -44,7 +44,6 @@ class SettingFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
         // my information
-        binding.tvNickname.text = MainActivity.login.user_nicknm
         binding.tvPhoneNum.text = MainActivity.login.user_tel
         binding.tvMyTown.text = MainActivity.login.user_town
         // register my pet

@@ -148,7 +148,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="10dp"
                             android:gravity="center"
-                            android:text="Found\nLocation"
+                            android:text="Lost\nLocation"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
 
