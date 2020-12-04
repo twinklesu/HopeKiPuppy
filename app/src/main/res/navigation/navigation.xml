@@ -29,6 +29,11 @@
             app:destination="@id/mainLostFragment"
             app:popUpTo="@id/titleFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_joinFragment"
+            app:destination="@id/joinFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
@@ -204,6 +209,17 @@
             android:id="@+id/action_setLocationFragment_to_writeFoundFragment"
             app:destination="@id/writeFoundFragment"
             app:popUpTo="@id/setLocationFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/joinFragment"
+        android:name="com.example.hopekipuppy.login.JoinFragment"
+        android:label="fragment_join"
+        tools:layout="@layout/fragment_join" >
+        <action
+            android:id="@+id/action_joinFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/joinFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>

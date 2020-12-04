@@ -50,6 +50,10 @@ class LoginFragment : Fragment() {
             onClickLoginButton()
         }
 
+        binding.btSignIn.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToJoinFragment())
+        }
+
         return binding.root
     }
 
