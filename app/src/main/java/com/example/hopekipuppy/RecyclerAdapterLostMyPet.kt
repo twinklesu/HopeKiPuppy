@@ -46,8 +46,9 @@ class RecyclerAdapterLostMyPet(val context: Context, val petList: ArrayList<Pet>
                 binding.etLostPhoneNum.setText(MainActivity.login.user_tel)
                 binding.etLostPhoneNum.editableText
                 binding.etLostRegNum.setText(pet.reg_num)
-                // 사진 넘기기 여기만 하면 넘어감
-                writeLostFragment.petImageUrl = pet_Image
+                Glide.with(context)
+                        .load(pet.image)
+                        .into(binding.ivTest)
             }
         }
     }
