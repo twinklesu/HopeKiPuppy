@@ -117,6 +117,7 @@ class DetailLostFragment : Fragment() {
                             binding.recyclerComments.adapter = RecyclerAdapterLostComments
                             val manager = LinearLayoutManager(binding.recyclerComments.context)
                             binding.recyclerComments.layoutManager = manager
+                            binding.recyclerComments.canScrollVertically(0)
 
                         } catch (e: JSONException) {
                             e.printStackTrace()

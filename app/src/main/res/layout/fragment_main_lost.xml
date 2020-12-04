@@ -35,7 +35,7 @@
 
             <TextView
                 android:id="@+id/Title"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="2"
@@ -64,13 +64,18 @@
 
             <TextView
                 android:id="@+id/DongText"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="140dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Dong"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/Set_Keyword_Button"
@@ -85,7 +90,7 @@
                 android:id="@+id/Setting_Go_Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:layout_gravity="right"
                 android:backgroundTint="@color/black"
                 android:text="setting" />
 

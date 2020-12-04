@@ -7,10 +7,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+            <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,13 +31,14 @@
                         android:id="@+id/tv_post_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/black"
+                        android:layout_marginBottom="10dp"
+                        android:background="#383838"
                         android:ems="10"
-                        android:paddingStart="5dp"
+                        android:paddingStart="15dp"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
                         android:textColor="@color/white"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         tools:text="이거 제목" />
 
                 </LinearLayout>
@@ -229,6 +230,12 @@
                     android:text="comments"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="#000000" />
                 <LinearLayout
                     android:id="@+id/linaer_comment"
                     android:layout_width="match_parent"
@@ -261,12 +268,12 @@
                         android:id="@+id/recycler_comments"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:scrollbars = "vertical">
+                        >
 
                     </androidx.recyclerview.widget.RecyclerView>
 
             </LinearLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

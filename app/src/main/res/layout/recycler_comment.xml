@@ -14,7 +14,7 @@
         <TextView
             android:id="@+id/comments_id"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Name"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -26,7 +26,7 @@
         <TextView
             android:id="@+id/comments"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="TextView"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/comments_id"
