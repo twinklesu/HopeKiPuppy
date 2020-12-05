@@ -166,6 +166,8 @@ class WriteLostFragment : Fragment() {
         json["phone_num"] = binding.etLostPhoneNum.text.toString()
         json["character"] = binding.etLostCharacter.text.toString()
         json["image"] = petImageUrl
+        json["longitude"] = MainActivity.login.longitude.toString()
+        json["latitude"] = MainActivity.login.latitude.toString()
 
 
         val parameter = JSONObject(json as Map<*, *>)

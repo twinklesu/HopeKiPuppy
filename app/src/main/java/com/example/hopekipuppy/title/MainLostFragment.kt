@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
+import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
@@ -33,14 +34,19 @@ import androidx.recyclerview.widget.GridLayoutManager as GridLayoutManager
 class MainLostFragment : Fragment() {
     private lateinit var viewModel: LostViewModel
     private lateinit var binding : FragmentMainLostBinding
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private lateinit var locationCallback: LocationCallback
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_main_lost, container, false)
+
+        binding.DongText.text = MainActivity.login.user_town
+        Timber.d(binding.DongText.text.toString())
 
         binding.LostGoButton.setBackgroundColor(Color.WHITE)
         binding.LostGoButton.setTextColor(Color.BLACK)
@@ -65,12 +71,6 @@ class MainLostFragment : Fragment() {
 
 
 
-
-
-
-        getLoc()
-        binding.DongText.text = MainActivity.login.user_town
-
         // lost 목록 가져오기
         val queue: RequestQueue = Volley.newRequestQueue(this.context)
         val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/get-lost-list/"
@@ -85,8 +85,13 @@ class MainLostFragment : Fragment() {
                     val result_list = response
                     for (i in 0..response.length() - 1) {
                         val result = result_list.getJSONObject(i)
-                        val obj = LostSimple(result.getInt("post_id"), result.getString("title"), result.getString("image"))
-                        lost_list.add(obj)
+                        if (compareLatLong(result.getDouble("latitude"), result.getDouble("longitude"))){
+                            val obj = LostSimple(result.getInt("post_id"), result.getString("title"), result.getString("image"))
+                            lost_list.add(obj)
+                        }
+                        else {
+                            Timber.d("not in 2km ${result.getString("lost_loc")}")
+                        }
                     }
                     val LostAdapter = MainLostAdapter(binding.LostRecyclerView.context, lost_list)
                     binding.LostRecyclerView.adapter = LostAdapter
@@ -105,56 +110,20 @@ class MainLostFragment : Fragment() {
         return binding.root
     }
 
+    private fun compareLatLong(lat: Double, long: Double): Boolean {
+        val user_loc = Location("user")
+        val post_loc = Location("lost")
 
-    private fun getLoc() {
-        var latitude: Double
-        var longitude: Double
+        user_loc.longitude = MainActivity.login.longitude!!
+        user_loc.latitude = MainActivity.login.latitude!!
 
-        // get permission
-        val lm = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        if (ActivityCompat.checkSelfPermission(
-                        requireActivity(),
-                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(requireActivity(),
-                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-        ) {
-            val PERMISSIONS = arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-            ActivityCompat.requestPermissions(requireActivity(), PERMISSIONS, 100)
-        }
+        post_loc.longitude = long
+        post_loc.latitude = lat
 
-        // get location
-        val locationRequest = LocationRequest.create()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = 10000
-        locationRequest.fastestInterval = 10000
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult?) { locationResult ?: return }}
-        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
-        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-            latitude = location.latitude
-            longitude = location.longitude
-            Timber.d("lat ${latitude}, long ${longitude}")
-            MainActivity.login.latitude = latitude
-            MainActivity.login.longitude = longitude
+        val distance = user_loc.distanceTo(post_loc)
+        Timber.d("distance ${distance}")
 
-            // get 동
-            val geocoder = Geocoder(this.context, Locale.KOREAN)
-            var addressList: List<Address>? = null
-            try {
-                do {
-                    addressList = geocoder.getFromLocation(latitude, longitude, 1)
-                } while (addressList!!.isEmpty())
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-            val dong = addressList!![0].thoroughfare ?:"error"
-            Timber.d(dong)
-            MainActivity.login.user_town = dong
-        }
+        return distance <= 2000
     }
 }
 

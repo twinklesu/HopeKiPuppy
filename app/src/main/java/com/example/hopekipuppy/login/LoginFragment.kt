@@ -33,6 +33,9 @@ import java.util.*
 class LoginFragment : Fragment() {
 
     private lateinit var binding : FragmentLoginBinding
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationCallback: LocationCallback
+    private lateinit var geocoder: Geocoder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +48,8 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
+
+        geocoder = Geocoder(requireContext(), Locale.KOREAN)
 
         binding.btLogin.setOnClickListener {
             onClickLoginButton()
@@ -61,10 +66,10 @@ class LoginFragment : Fragment() {
     on click listener for login button
      */
     private fun onClickLoginButton() {
-            val id = binding.tvId.text.toString()
-            val pw = binding.tvPw.text.toString()
-            val login = Login(id = id, pw = pw)
-            volley_login(login)
+        val id = binding.tvId.text.toString()
+        val pw = binding.tvPw.text.toString()
+        val login = Login(id = id, pw = pw)
+        volley_login(login)
     }
 
 
@@ -87,10 +92,11 @@ class LoginFragment : Fragment() {
                         pw = result.getString("user_pw")
                         Timber.d("get password: ${pw}, input password: ${login.pw}}")
                         if (pw == login.pw) {
-                            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainLostFragment())
                             MainActivity.login = login
                             MainActivity.login.user_nicknm = result.getString("user_nicknm")
                             MainActivity.login.user_tel = result.getString("user_tel")
+                            getLoc()
+                            // 위치 받고 넘어감
                         } else Toast.makeText(this.context, "Check your PW", Toast.LENGTH_SHORT)
                             .show()
                     } else Toast.makeText(
@@ -106,6 +112,58 @@ class LoginFragment : Fragment() {
             it.printStackTrace()
             Timber.d("login request fail") }
         queue.add(jsonArrayList)
+    }
+
+
+    private fun getLoc() {
+        var latitude: Double
+        var longitude: Double
+
+        // get permission
+        val lm = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (ActivityCompat.checkSelfPermission(
+                        requireActivity(),
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(requireActivity(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        ) {
+            val PERMISSIONS = arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+            ActivityCompat.requestPermissions(requireActivity(), PERMISSIONS, 100)
+        }
+
+        // get location
+        val locationRequest = LocationRequest.create()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = 10000
+        locationRequest.fastestInterval = 10000
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) { locationResult ?: return }}
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+            latitude = location.latitude
+            longitude = location.longitude
+            Timber.d("lat ${latitude}, long ${longitude}")
+            MainActivity.login.latitude = latitude
+            MainActivity.login.longitude = longitude
+
+            // get 동
+            var addressList: List<Address>? = null
+            try {
+                do {
+                    addressList = geocoder.getFromLocation(latitude, longitude, 1)
+                } while (addressList!!.isEmpty())
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            val dong = addressList!![0].thoroughfare ?:"error"
+            Timber.d(dong)
+            MainActivity.login.user_town = dong
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainLostFragment())
+        }
     }
 
 
