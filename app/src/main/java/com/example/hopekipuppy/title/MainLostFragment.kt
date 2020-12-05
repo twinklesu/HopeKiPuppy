@@ -110,7 +110,7 @@ class MainLostFragment : Fragment() {
         return binding.root
     }
 
-    private fun compareLatLong(lat: Double, long: Double): Boolean {
+    fun compareLatLong(lat: Double, long: Double): Boolean {
         val user_loc = Location("user")
         val post_loc = Location("lost")
 

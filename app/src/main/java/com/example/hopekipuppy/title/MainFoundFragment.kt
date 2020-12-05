@@ -68,9 +68,14 @@ class MainFoundFragment : Fragment() {
                         val result_list = response
                         for (i in 0..response.length() - 1) {
                             val result = result_list.getJSONObject(i)
-                            val obj = Found(result.getInt("post_id"), result.getString("title"), result.getString("found_loc"),
-                                    result.getString("found_date"), result.getString("detail"), result.getString("image"))
-                            found_list.add(obj)
+                            if (MainLostFragment().compareLatLong(result.getDouble("latitude"), result.getDouble("longitude"))){
+                                val obj = Found(result.getInt("post_id"), result.getString("title"), result.getString("found_loc"),
+                                        result.getString("found_date"), result.getString("detail"), result.getString("image"))
+                                found_list.add(obj)
+                            }
+                            else {
+                                Timber.d("not in 2km ${result.getString("found_loc")}")
+                            }
                         }
                         val LostAdapter = MainFoundAdapter(binding.FoundRecyclerView.context, found_list)
                         binding.FoundRecyclerView.adapter = LostAdapter

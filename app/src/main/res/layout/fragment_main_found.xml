@@ -63,8 +63,9 @@
                 android:id="@+id/DongText"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:layout_gravity="left"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
                 android:text="Dong"
                 android:textColor="@color/black"
                 android:textSize="18sp" />

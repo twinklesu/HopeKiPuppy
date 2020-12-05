@@ -163,6 +163,8 @@ class WriteFoundFragment : Fragment() {
         json["found_date"] = binding.tvFoundDate.text.toString()
         json["detail"] = binding.etLostCharacter.text.toString()
         json["image"] = petImageUrl
+        json["longitude"] = long.toString()
+        json["latitude"] = lat.toString()
 
 
         val parameter = JSONObject(json as Map<*, *>)
