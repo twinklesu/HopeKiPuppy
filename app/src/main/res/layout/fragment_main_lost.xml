@@ -79,15 +79,6 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/Set_Keyword_Button"
-                android:layout_width="49dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:backgroundTint="@color/black"
-                android:text="#"
-                android:textSize="20dp" />
-
-            <Button
                 android:id="@+id/Setting_Go_Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

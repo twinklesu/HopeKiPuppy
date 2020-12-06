@@ -65,9 +65,7 @@ class MainLostFragment : Fragment() {
         binding.SettingGoButton.setOnClickListener {
             findNavController().navigate(MainLostFragmentDirections.actionMainLostFragmentToSettingFragment())
         }
-        binding.SetKeywordButton.setOnClickListener {
-            findNavController().navigate(MainLostFragmentDirections.actionMainLostFragmentToSetKeywordFragment())
-        }
+
 
 
 
