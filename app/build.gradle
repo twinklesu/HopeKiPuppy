@@ -69,6 +69,7 @@ dependencies {
 
     // get image
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
 

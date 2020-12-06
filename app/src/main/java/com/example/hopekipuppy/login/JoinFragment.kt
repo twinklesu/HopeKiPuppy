@@ -1,6 +1,7 @@
 package com.example.hopekipuppy.login
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,10 +16,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.hopekipuppy.DetailFoundFragment
-import com.example.hopekipuppy.MainActivity
-import com.example.hopekipuppy.R
-import com.example.hopekipuppy.WriteFoundFragmentDirections
+import com.example.hopekipuppy.*
 import com.example.hopekipuppy.databinding.FragmentJoinBinding
 import com.example.hopekipuppy.title.Found
 import com.google.android.gms.tasks.OnCompleteListener
@@ -135,6 +133,7 @@ class JoinFragment : Fragment() {
                         }
                         // Get new FCM registration token
                         token = task.result.toString()
+
                         Timber.d("token: ${token}")
                         join(queue = queue)
                     })
@@ -171,4 +170,9 @@ class JoinFragment : Fragment() {
         }
         queue.add(jsonObjectRequest)
     }
-}
+
+
+
+
+    }
+

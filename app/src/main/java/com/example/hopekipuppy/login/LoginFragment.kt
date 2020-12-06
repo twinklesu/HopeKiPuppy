@@ -2,6 +2,8 @@ package com.example.hopekipuppy.login
 
 import android.Manifest
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
@@ -36,10 +38,21 @@ class LoginFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
     private lateinit var geocoder: Geocoder
+    private lateinit var sf : SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val notId = "notID"
+        val notPW = "notPW"
+        val getId = sharedPref?.getString("id",notId)
+        val getPW = sharedPref?.getString("pw", notPW)
+
+        if (getId != notId && getPW != notPW){
+            var login = Login(id = getId!!, pw = getPW!!)
+            volley_login(login)
+        }
 
     }
 
@@ -47,6 +60,10 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
+
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
 
         geocoder = Geocoder(requireContext(), Locale.KOREAN)
@@ -59,6 +76,7 @@ class LoginFragment : Fragment() {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToJoinFragment())
         }
 
+
         return binding.root
     }
 
@@ -69,7 +87,17 @@ class LoginFragment : Fragment() {
         val id = binding.tvId.text.toString()
         val pw = binding.tvPw.text.toString()
         val login = Login(id = id, pw = pw)
+
         volley_login(login)
+        sf = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with (sf.edit()){
+            putString("id",id)
+            putString("pw",pw)
+            commit()
+        }
+
+
+
     }
 
 
@@ -179,4 +207,5 @@ data class Login(
     var latitude: Double? = null,
     var longitude: Double? = null
 )
+
 

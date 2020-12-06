@@ -1,5 +1,7 @@
 package com.example.hopekipuppy
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.telephony.mbms.MbmsErrors
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         lateinit var login : Login
         lateinit var storage: FirebaseStorage
+
     }
 
 
@@ -23,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         storage = Firebase.storage
+
 
     }
 }
