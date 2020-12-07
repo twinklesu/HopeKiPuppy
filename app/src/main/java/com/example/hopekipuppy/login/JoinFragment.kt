@@ -20,10 +20,6 @@ import com.example.hopekipuppy.*
 import com.example.hopekipuppy.databinding.FragmentJoinBinding
 import com.example.hopekipuppy.title.Found
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.actionCodeSettings
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import org.json.JSONException
 import org.json.JSONObject
@@ -35,19 +31,16 @@ class JoinFragment : Fragment() {
 
     private lateinit var binding: FragmentJoinBinding
     private var token: String? = null
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        auth = FirebaseAuth.getInstance()
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_join, container, false)
 
         var validId = false
@@ -126,52 +119,33 @@ class JoinFragment : Fragment() {
         }
 
         binding.btSignIn.setOnClickListener {
-            val email = binding.etEmail.text.toString()
-            val pw = binding.etPw.text.toString()
-
             if (validId && validTel && binding.etPw.text.isNotEmpty() && binding.etPw2.text.isNotEmpty()){
                 val queue = Volley.newRequestQueue(this.context)
                 if (binding.etPw.text.toString() != binding.etPw2.text.toString()){
                     Toast.makeText(requireContext(), "Check your PW", Toast.LENGTH_SHORT).show()
                 }
                 else{
+                    // firebase token
+                    FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                        if (!task.isSuccessful) {
+                            Timber.d("Fetching FCM registration token failed ${task.exception}")
+                            return@OnCompleteListener
+                        }
+                        // Get new FCM registration token
+                        token = task.result.toString()
 
-                    auth.createUserWithEmailAndPassword(email, pw)
-                        .addOnCompleteListener(OnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                // Sign in success, update UI with the signed-in user's information
-                                val user = auth.currentUser
-                                Timber.d("email success")
-                            } else {
-                                Timber.d("email fail")
-                            }
+                        Timber.d("token: ${token}")
+                        join(queue = queue)
                     })
-                }
-                token = "a"
-                join(queue = queue)
-//                FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-//                        if (!task.isSuccessful) {
-//                            Timber.d("Fetching FCM registration token failed ${task.exception}")
-//                            return@OnCompleteListener
-//                        }
-//                        // Get new FCM registration token
-//
-//
-//
-//
-//                        Timber.d("token: ${token}")
-//
-//                    })
                     findNavController().navigate(JoinFragmentDirections.actionJoinFragmentToLoginFragment())
                 }
             }
 
-
+        }
         return binding.root
     }
 
     private fun join(queue: RequestQueue){
-
         val url = "http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/join/"
 
         val json = HashMap<String?, String?>()

@@ -26,8 +26,6 @@ import com.example.hopekipuppy.MainActivity
 import com.example.hopekipuppy.R
 import com.example.hopekipuppy.databinding.FragmentLoginBinding
 import com.google.android.gms.location.*
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
 import org.json.JSONException
 import timber.log.Timber
 import java.io.IOException
@@ -44,18 +42,6 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                return@OnCompleteListener
-                val token = task.result
-                Timber.d(token)
-            }
-            else{
-                Timber.d("token fail")
-            }
-        })
 
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
         val notId = "notID"
@@ -74,6 +60,8 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
 
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
@@ -101,7 +89,6 @@ class LoginFragment : Fragment() {
         val login = Login(id = id, pw = pw)
 
         volley_login(login)
-
         sf = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         with (sf.edit()){
             putString("id",id)
@@ -204,8 +191,6 @@ class LoginFragment : Fragment() {
             Timber.d(dong)
             MainActivity.login.user_town = dong
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainLostFragment())
-
-
         }
     }
 
