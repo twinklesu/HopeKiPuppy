@@ -2,7 +2,7 @@
 2020 서울과학기술대학교 ITM전공 Mobile Programming 팀프로젝트 - HopeKiPuppy 모바일 앱<br>
 Team Project of Mobile Programming lecture, ITM, Seoultech - Mobile Application HopeKiPuppy<br><br>
 
-[HopeKiPuppy Server Repository](https://github.com/twinklesu/HopeKiPuppy)<br><br>
+[HopeKiPuppy Server Repository](https://github.com/twinklesu/mpBackends)<br><br>
 
 지역 커뮤니티를 기반으로 잃어버린 반려동물을 찾고, 찾아주는 서비스<br>
 본인의 반려동물을 미리 등록해두고, 비상상황 시 등록된 정보로 빠르게 글을 작성하는 서비스가 특징<br>
